@@ -211,26 +211,26 @@ export default function SchedulePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="page-title">Diary Schedule &amp; Google Calendar</h1>
+          <h1 className="page-title">Schedule &amp; Google Calendar</h1>
           <p className="page-subtitle">
-            Ruled study timeline ·{' '}
-            <span className="tabular-nums text-slate-700">{allBlocks.length}</span>{' '}
+            Adaptive study schedule ·{' '}
+            <span className="tabular-nums text-black font-bold">{allBlocks.length}</span>{' '}
             scheduled blocks
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex items-center gap-1 p-1 bg-[#F7ECF5] border border-[#E8CEE6] rounded-xl">
+          <div className="flex items-center gap-1 p-1 bg-purple-100/70 border border-purple-200/80 rounded-xl">
             <button
               type="button"
               onClick={() => setViewMode('day')}
               className={clsx(
                 'px-3 py-1 rounded-lg text-xs transition-colors',
                 viewMode === 'day'
-                  ? 'bg-white text-[#2A1029] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-black font-bold shadow-xs'
+                  : 'text-purple-900/70 hover:text-black font-medium'
               )}
             >
-              Day Page
+              Day View
             </button>
             <button
               type="button"
@@ -238,11 +238,11 @@ export default function SchedulePage() {
               className={clsx(
                 'px-3 py-1 rounded-lg text-xs transition-colors',
                 viewMode === 'week'
-                  ? 'bg-white text-[#2A1029] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-black font-bold shadow-xs'
+                  : 'text-purple-900/70 hover:text-black font-medium'
               )}
             >
-              Week Spread
+              Week View
             </button>
           </div>
 
@@ -263,14 +263,14 @@ export default function SchedulePage() {
       </div>
 
       {/* Google Calendar Integration Card */}
-      <div className="card-accent p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="card p-5 border border-purple-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-white border border-[#E5B8E0] flex items-center justify-center text-[#B8328A] shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 shrink-0">
             <Calendar className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm text-[#2A1029]">Google Calendar Integration</div>
-            <p className="text-xs text-slate-600 mt-0.5">
+            <div className="text-sm font-bold text-black">Google Calendar Integration</div>
+            <p className="text-xs text-purple-900/70 mt-0.5">
               {needsAuth
                 ? 'Sign in with Google to view your live Google Calendar events and sync study blocks, or click "Add to Google Calendar" on any block below.'
                 : `Connected as ${gcalUser?.email ?? 'Google Account'} · ${gcalEvents.length} event(s) loaded this week`}
@@ -344,8 +344,8 @@ export default function SchedulePage() {
 
       {/* Week Navigation & 7-Day Selector Strip */}
       <div className="card overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3 border-b border-[#EAD4E8] bg-[#FFF9FD]/90">
-          <div className="text-xs text-[#2A1029]">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-purple-100 bg-white">
+          <div className="text-xs font-bold text-black">
             {formatDate(weekDates[0], 'MMM d')} – {formatDate(weekDates[6], 'MMM d, yyyy')}
           </div>
           <div className="flex items-center gap-1.5">
@@ -356,7 +356,7 @@ export default function SchedulePage() {
                 setWeekOffset(nextOffset);
                 setSelectedDate(getWeekDatesWithOffset(nextOffset)[0]);
               }}
-              className="p-1.5 rounded-lg border border-[#E8CEE6] bg-white text-slate-600 hover:bg-[#FDF4F9]"
+              className="p-1.5 rounded-lg border border-purple-200 bg-white text-purple-700 hover:bg-purple-50 transition-colors"
               aria-label="Previous week"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -367,7 +367,7 @@ export default function SchedulePage() {
                 setWeekOffset(0);
                 setSelectedDate(todayStr);
               }}
-              className="px-2.5 py-1 rounded-lg border border-[#E8CEE6] bg-white text-xs text-slate-700 hover:bg-[#FDF4F9]"
+              className="px-2.5 py-1 rounded-lg border border-purple-200 bg-white text-xs font-bold text-black hover:bg-purple-50 transition-colors"
             >
               Today
             </button>
@@ -378,7 +378,7 @@ export default function SchedulePage() {
                 setWeekOffset(nextOffset);
                 setSelectedDate(getWeekDatesWithOffset(nextOffset)[0]);
               }}
-              className="p-1.5 rounded-lg border border-[#E8CEE6] bg-white text-slate-600 hover:bg-[#FDF4F9]"
+              className="p-1.5 rounded-lg border border-purple-200 bg-white text-purple-700 hover:bg-purple-50 transition-colors"
               aria-label="Next week"
             >
               <ChevronRight className="w-3.5 h-3.5" />
@@ -386,7 +386,7 @@ export default function SchedulePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-7 divide-x divide-[#EAD4E8]">
+        <div className="grid grid-cols-7 divide-x divide-purple-100">
           {weekDates.map((date, i) => {
             const dayBlocks = allBlocks.filter((b) => b.date === date);
             const dayHours =
@@ -405,31 +405,31 @@ export default function SchedulePage() {
                 className={clsx(
                   'flex flex-col items-center py-3.5 px-2 transition-colors text-center relative',
                   isSelected
-                    ? 'bg-[#FDF4F9] text-[#96246F]'
-                    : 'hover:bg-[#FCF8FB] text-slate-700'
+                    ? 'bg-purple-100 text-purple-950 font-bold'
+                    : 'hover:bg-purple-50 text-purple-900/70 font-medium'
                 )}
               >
                 <span
                   className={clsx(
                     'text-[11px]',
-                    isSelected ? 'text-[#B8328A]' : 'text-slate-500'
+                    isSelected ? 'text-purple-950 font-bold' : 'text-purple-400'
                   )}
                 >
                   {DAYS_OF_WEEK[i]}
                 </span>
                 <span
                   className={clsx(
-                    'mt-1 w-7 h-7 rounded-full flex items-center justify-center text-sm tabular-nums',
+                    'mt-1 w-7 h-7 rounded-full flex items-center justify-center text-sm tabular-nums font-mono',
                     isSelected
-                      ? 'bg-[#C83E8B] text-white'
+                      ? 'bg-black text-white font-bold'
                       : isToday
-                      ? 'bg-[#BBF7D0] text-[#14532D]'
-                      : 'text-slate-900'
+                      ? 'bg-purple-700 text-white font-bold'
+                      : 'text-black font-semibold'
                   )}
                 >
                   {Number(date.split('-')[2])}
                 </span>
-                <span className="mt-1.5 text-[11px] tabular-nums text-slate-500">
+                <span className="mt-1.5 text-[11px] font-mono tabular-nums text-purple-400">
                   {dayBlocks.length > 0 ? hoursToReadable(dayHours) : '—'}
                 </span>
               </button>
@@ -438,7 +438,7 @@ export default function SchedulePage() {
         </div>
       </div>
 
-      {/* Main Ruled Diary Schedule Content */}
+      {/* Main Schedule Content */}
       {isLoading ? (
         <div className="space-y-3">
           {[...Array(4)].map((_, i) => (
@@ -446,13 +446,13 @@ export default function SchedulePage() {
           ))}
         </div>
       ) : viewMode === 'day' ? (
-        <div className="card bg-[#FFFCFE] overflow-hidden">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-5 py-4 border-b border-[#EAD4E8] bg-[#FFF9FD]">
+        <div className="card overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-5 py-4 border-b border-purple-100 bg-white">
             <div>
-              <h2 className="text-base text-[#2A1029]">
+              <h2 className="text-base font-bold text-black">
                 {formatDate(selectedDate, 'EEEE, MMMM d, yyyy')}
               </h2>
-              <div className="text-xs text-slate-500 mt-0.5 tabular-nums">
+              <div className="text-xs text-purple-900/60 mt-0.5 tabular-nums font-mono font-medium">
                 {selectedBlocks.length} block{selectedBlocks.length !== 1 ? 's' : ''} ·{' '}
                 {hoursToReadable(totalDayMinutes / 60)} planned · {completedDayBlocks} completed
               </div>
@@ -460,7 +460,7 @@ export default function SchedulePage() {
             <button
               type="button"
               onClick={() => navigate('/tasks?new=1')}
-              className="btn-primary text-xs"
+              className="btn-primary text-xs font-semibold"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Task</span>
@@ -469,31 +469,31 @@ export default function SchedulePage() {
 
           {selectedBlocks.length === 0 ? (
             <div className="py-14 px-6 text-center">
-              <Calendar className="w-6 h-6 text-[#C83E8B] mx-auto mb-2.5" />
-              <div className="text-sm text-[#2A1029]">
-                No study blocks written on this diary page
+              <Calendar className="w-6 h-6 text-purple-400 mx-auto mb-2.5" />
+              <div className="text-sm font-bold text-black">
+                No study blocks planned for this date
               </div>
-              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                Click &quot;Optimize Schedule&quot; to automatically allocate your pending tasks onto your diary timeline.
+              <p className="text-xs text-purple-900/60 mt-1 max-w-sm mx-auto font-medium">
+                Click &quot;Optimize Schedule&quot; to automatically allocate your pending tasks onto your study timeline.
               </p>
               <button
                 type="button"
                 onClick={() => generateMutation.mutate()}
                 disabled={generateMutation.isPending}
-                className="btn-primary mt-4"
+                className="btn-primary mt-4 font-semibold"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Optimize Schedule</span>
               </button>
             </div>
           ) : (
-            <div className="divide-y divide-[#EAD4E8]/75">
+            <div className="divide-y divide-purple-100">
               {selectedBlocks.map((block) => {
                 const gcalUrl = buildGoogleCalendarTemplateUrl({
                   title: block.task?.title ?? 'Focused Study Session',
                   description: block.task?.subject
                     ? `Subject: ${block.task.subject}`
-                    : 'Scheduled via TaskTracker Diary',
+                    : 'Scheduled via TaskTracker',
                   date: block.date,
                   startTime: block.startTime,
                   endTime: block.endTime,
@@ -503,13 +503,13 @@ export default function SchedulePage() {
                   <div
                     key={block._id}
                     className={clsx(
-                      'flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3.5 hover:bg-[#FDF4F9]/60 transition-colors',
+                      'flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3.5 hover:bg-purple-50/70 transition-colors',
                       block.isCompleted && 'opacity-65'
                     )}
                   >
                     <div className="flex items-start gap-3 min-w-0">
-                      {/* Left Margin Time Column */}
-                      <div className="w-11 text-xs text-[#86198F] tabular-nums shrink-0 text-right pr-1.5 pt-0.5">
+                      {/* Left Time Column */}
+                      <div className="w-12 text-xs font-mono text-purple-700 font-bold tabular-nums shrink-0 text-right pr-1.5 pt-0.5">
                         {block.startTime}
                       </div>
 
@@ -525,10 +525,10 @@ export default function SchedulePage() {
                         <div className="flex items-center gap-2 flex-wrap">
                           <span
                             className={clsx(
-                              'text-sm',
+                              'text-sm font-semibold',
                               block.isCompleted
-                                ? 'line-through text-slate-400'
-                                : 'text-[#2A1029]'
+                                ? 'line-through text-purple-400'
+                                : 'text-black'
                             )}
                           >
                             {block.task?.title ?? 'Focused Study Session'}
@@ -537,12 +537,12 @@ export default function SchedulePage() {
                             <CategoryLabel category={block.task.category} />
                           )}
                         </div>
-                        <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 mt-1">
-                          <span className="tabular-nums text-slate-700">
+                        <div className="flex flex-wrap items-center gap-1.5 text-xs text-purple-900/60 mt-1 font-medium">
+                          <span className="tabular-nums font-mono text-black font-semibold">
                             {block.startTime} – {block.endTime}
                           </span>
                           <span aria-hidden="true">·</span>
-                          <span className="tabular-nums">
+                          <span className="tabular-nums font-mono font-medium">
                             {block.durationMinutes} min
                           </span>
                           {block.task?.subject && (
@@ -587,7 +587,7 @@ export default function SchedulePage() {
                           <span>Complete</span>
                         </button>
                       ) : (
-                        <span className="text-xs text-[#0F4C2A] px-2">Completed</span>
+                        <span className="text-xs text-emerald-700 font-medium px-2">Completed</span>
                       )}
                     </div>
                   </div>
@@ -604,38 +604,38 @@ export default function SchedulePage() {
               .filter((b) => b.date === date)
               .sort((a, b) => a.startTime.localeCompare(b.startTime));
             return (
-              <div key={date} className="card bg-[#FFFCFE] overflow-hidden flex flex-col">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-[#EAD4E8] bg-[#FFF9FD]">
-                  <span className="text-xs text-[#2A1029]">
+              <div key={date} className="card overflow-hidden flex flex-col">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-purple-100 bg-white">
+                  <span className="text-xs font-bold text-black">
                     {DAYS_OF_WEEK[idx]}, {formatDate(date, 'MMM d')}
                   </span>
-                  <span className="text-xs tabular-nums text-slate-500">
+                  <span className="text-xs font-mono tabular-nums text-purple-900/70 font-semibold">
                     {dayBlocks.length} block{dayBlocks.length !== 1 ? 's' : ''}
                   </span>
                 </div>
                 {dayBlocks.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-slate-400 flex-1 flex items-center justify-center">
+                  <div className="p-6 text-center text-xs text-purple-400 flex-1 flex items-center justify-center font-medium">
                     No study blocks scheduled
                   </div>
                 ) : (
-                  <div className="divide-y divide-[#EAD4E8]/75">
+                  <div className="divide-y divide-purple-100">
                     {dayBlocks.map((b) => (
-                      <div key={b._id} className="px-4 py-3 flex items-start justify-between gap-2">
+                      <div key={b._id} className="px-4 py-3 flex items-start justify-between gap-2 hover:bg-purple-50/70 transition-colors">
                         <div className="min-w-0">
                           <div
                             className={clsx(
-                              'text-xs truncate',
-                              b.isCompleted ? 'line-through text-slate-400' : 'text-[#2A1029]'
+                              'text-xs truncate font-semibold',
+                              b.isCompleted ? 'line-through text-purple-400' : 'text-black'
                             )}
                           >
                             {b.task?.title ?? 'Study Session'}
                           </div>
-                          <div className="text-[11px] tabular-nums text-slate-500 mt-0.5">
+                          <div className="text-[11px] font-mono tabular-nums text-purple-900/60 mt-0.5">
                             {b.startTime} – {b.endTime} · {b.durationMinutes}m
                           </div>
                         </div>
                         {b.isCompleted && (
-                          <Check className="w-3.5 h-3.5 text-[#0F4C2A] shrink-0 mt-0.5" />
+                          <Check className="w-3.5 h-3.5 text-purple-700 shrink-0 mt-0.5" />
                         )}
                       </div>
                     ))}
@@ -649,11 +649,11 @@ export default function SchedulePage() {
 
       {/* Live Google Calendar Events Feed (when signed in) */}
       {!needsAuth && (
-        <div className="card bg-[#FFFCFE] overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-[#EAD4E8] bg-[#FFF9FD]">
+        <div className="card overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-purple-100 bg-white">
             <div>
-              <h2 className="text-base text-[#2A1029]">Google Calendar Events (This Week)</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-base font-bold text-black">Google Calendar Events (This Week)</h2>
+              <p className="text-xs text-purple-900/60 font-medium">
                 Live events from your primary Google Calendar
               </p>
             </div>
@@ -669,21 +669,21 @@ export default function SchedulePage() {
           </div>
 
           {gcalEvents.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500">
+            <div className="p-8 text-center text-xs text-purple-900/60 font-medium">
               No Google Calendar events found for this week.
             </div>
           ) : (
-            <div className="divide-y divide-[#EAD4E8]/75">
+            <div className="divide-y divide-purple-100">
               {gcalEvents.map((ev) => (
                 <div
                   key={ev.id}
-                  className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#FDF4F9]/60 transition-colors"
+                  className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-purple-50/70 transition-colors"
                 >
                   <div className="min-w-0">
-                    <div className="text-sm text-[#2A1029] truncate">
+                    <div className="text-sm font-semibold text-black truncate">
                       {ev.summary || 'Untitled Event'}
                     </div>
-                    <div className="text-xs text-slate-500 tabular-nums mt-0.5">
+                    <div className="text-xs text-purple-900/60 font-mono tabular-nums mt-0.5">
                       {ev.start?.dateTime
                         ? formatDate(ev.start.dateTime, 'EEE, MMM d · h:mm a')
                         : ev.start?.date}
@@ -695,7 +695,7 @@ export default function SchedulePage() {
                         href={ev.htmlLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-ghost py-1 px-2.5 text-xs"
+                        className="btn-ghost py-1 px-2.5 text-xs font-semibold"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>View</span>
@@ -704,7 +704,7 @@ export default function SchedulePage() {
                     <button
                       type="button"
                       onClick={() => setEventToDelete(ev)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                      className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-100 transition-colors"
                       title="Delete event from Google Calendar"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -724,27 +724,27 @@ export default function SchedulePage() {
         title="Confirm Google Calendar Sync"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-700">
+          <p className="text-sm text-purple-950">
             Create{' '}
-            <span className="tabular-nums text-[#2A1029]">
+            <span className="tabular-nums font-bold text-black font-mono">
               {selectedBlocks.filter((b) => !b.isCompleted).length}
             </span>{' '}
             study block event(s) for{' '}
-            <span>{formatDate(selectedDate, 'MMMM d, yyyy')}</span> on your primary Google Calendar?
+            <span className="font-semibold text-black">{formatDate(selectedDate, 'MMMM d, yyyy')}</span> on your primary Google Calendar?
           </p>
-          <div className="rounded-xl bg-[#FDF4F9] border border-[#EAD4E8] p-3 space-y-1.5 max-h-44 overflow-y-auto">
+          <div className="rounded-xl bg-purple-50 border border-purple-200 p-3 space-y-1.5 max-h-44 overflow-y-auto">
             {selectedBlocks
               .filter((b) => !b.isCompleted)
               .map((b) => (
-                <div key={b._id} className="text-xs text-slate-700 flex justify-between gap-2">
+                <div key={b._id} className="text-xs text-black font-medium flex justify-between gap-2">
                   <span className="truncate">{b.task?.title ?? 'Focused Study Session'}</span>
-                  <span className="tabular-nums text-slate-500 shrink-0">
+                  <span className="tabular-nums font-mono text-purple-700 font-semibold shrink-0">
                     {b.startTime} – {b.endTime}
                   </span>
                 </div>
               ))}
           </div>
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#EAD4E8]">
+          <div className="flex items-center justify-end gap-2 pt-2 border-t border-purple-100">
             <button
               type="button"
               onClick={() => setConfirmSyncModalOpen(false)}
@@ -771,14 +771,14 @@ export default function SchedulePage() {
         title="Delete Event from Google Calendar?"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-700">
+          <p className="text-sm text-purple-950">
             Are you sure you want to permanently delete{' '}
-            <span className="text-[#2A1029]">
+            <span className="font-bold text-black">
               &ldquo;{eventToDelete?.summary || 'Untitled Event'}&rdquo;
             </span>{' '}
             from your Google Calendar? This action cannot be undone.
           </p>
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#EAD4E8]">
+          <div className="flex items-center justify-end gap-2 pt-2 border-t border-purple-100">
             <button
               type="button"
               onClick={() => setEventToDelete(null)}

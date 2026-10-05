@@ -4,63 +4,33 @@
 
 @layer base {
   :root {
-    --brand-50: #fdf4f9;
-    --brand-100: #fce8f4;
-    --brand-200: #f9d0ea;
-    --brand-300: #f3a9d8;
-    --brand-400: #e779c1;
-    --brand-500: #d44fa6;
-    --brand-600: #b8328a;
-    --brand-700: #96246f;
-    --brand-800: #781d59;
-    --brand-900: #561540;
+    --brand-50: #faf5ff;
+    --brand-100: #f3e8ff;
+    --brand-200: #e9d5ff;
+    --brand-300: #d8b4fe;
+    --brand-400: #c084fc;
+    --brand-500: #a855f7;
+    --brand-600: #9333ea;
+    --brand-700: #7e22ce;
+    --brand-800: #6b21a8;
+    --brand-900: #581c87;
+    --brand-950: #3b0764;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 400;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
 
   body {
-    @apply text-slate-900 font-sans font-normal antialiased;
-    background-color: #f8edf7;
-    background-image:
-      linear-gradient(
-        to right,
-        transparent 52px,
-        rgba(226, 118, 183, 0.42) 52px,
-        rgba(226, 118, 183, 0.42) 53.5px,
-        transparent 53.5px,
-        transparent 57px,
-        rgba(226, 118, 183, 0.22) 57px,
-        rgba(226, 118, 183, 0.22) 58px,
-        transparent 58px
-      ),
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 31px,
-        rgba(198, 142, 204, 0.34) 31px,
-        rgba(198, 142, 204, 0.34) 32px
-      ),
-      radial-gradient(at 0% 0%, rgba(252, 231, 243, 0.85) 0px, transparent 55%),
-      radial-gradient(at 100% 0%, rgba(233, 213, 255, 0.75) 0px, transparent 55%),
-      radial-gradient(at 50% 100%, rgba(250, 232, 255, 0.8) 0px, transparent 60%);
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 400;
+    @apply text-slate-900 font-sans antialiased bg-[#FAF8FC];
     min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6, p, span, div, button, input, select, textarea, label, a, th, td {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 400;
-  }
-
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-normal text-slate-900 tracking-tight;
+    @apply font-sans font-bold text-black tracking-tight;
     text-wrap: balance;
   }
 
@@ -76,121 +46,88 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #e2c2df;
+    background: #d8b4fe;
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #cfa3cb;
+    background: #a855f7;
   }
 
   ::selection {
-    background: rgba(212, 79, 166, 0.16);
-    color: #561540;
+    background: rgba(147, 51, 234, 0.22);
+    color: #3b0764;
   }
 }
 
 @layer components {
-  /* ── Diary Page Layout ────────────────────────────────────────── */
+  /* ── Auth Panels (Purple, White & Black) ─────────────────────── */
+  .auth-shell {
+    @apply min-h-screen flex flex-col lg:flex-row bg-[#FAF8FC] text-black;
+  }
+  .auth-panel {
+    @apply hidden lg:flex lg:w-1/2 bg-black text-white p-12 xl:p-16 flex-col justify-between border-r border-purple-900/40 relative overflow-hidden;
+  }
+
+  /* ── Layout & Surfaces ────────────────────────────────────────── */
   .page-shell {
-    @apply px-6 py-7 sm:px-10 sm:py-9 max-w-[1200px] mx-auto animate-fade-in;
+    @apply px-6 py-6 sm:px-8 sm:py-8 max-w-[1240px] mx-auto animate-fade-in;
   }
 
   .page-title {
-    @apply text-2xl sm:text-3xl font-normal text-slate-900 tracking-tight;
+    @apply text-2xl sm:text-3xl font-sans font-bold text-black tracking-tight;
   }
 
   .page-subtitle {
-    @apply text-sm text-slate-500 mt-1;
+    @apply text-xs sm:text-sm text-purple-900/70 mt-1;
   }
 
-  /* ── Authentic Ruled Diary Page Surface ───────────────────────── */
+  /* ── Clean Content Surface (Zero Lines) ────────────────────────── */
   .diary-page-surface {
-    background-color: #fdf8fc;
-    background-image:
-      linear-gradient(
-        to right,
-        transparent 42px,
-        rgba(228, 115, 183, 0.45) 42px,
-        rgba(228, 115, 183, 0.45) 43.5px,
-        transparent 43.5px,
-        transparent 47px,
-        rgba(228, 115, 183, 0.22) 47px,
-        rgba(228, 115, 183, 0.22) 48px,
-        transparent 48px
-      ),
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 31px,
-        rgba(198, 140, 204, 0.36) 31px,
-        rgba(198, 140, 204, 0.36) 32px
-      ),
-      radial-gradient(at 15% 15%, rgba(252, 231, 243, 0.65) 0px, transparent 50%),
-      radial-gradient(at 85% 85%, rgba(243, 232, 255, 0.65) 0px, transparent 50%);
-    background-attachment: local;
-  }
-
-  /* ── Plain Card Interior (No Lines Behind Text) ───────────────── */
-  .diary-ruled-card {
-    background-color: #fffcfe;
+    background-color: #faf8fc;
     background-image: none;
   }
 
-  /* ── Stationery Cards with Stacked Diary Page Shadow ──────────── */
+  /* ── Clean Modern Cards (Single-Elevation, No Faux Page Lines) ── */
   .card {
-    @apply rounded-2xl bg-[#FFFCFE] border border-[#E8CEE6] transition-all duration-200;
-    background-image: none;
-    box-shadow:
-      0 2px 0 0 #f6e7f5,
-      0 5px 0 -1px #fffafd,
-      0 5px 0 0 #e9cfe7,
-      0 10px 24px -4px rgba(150, 36, 111, 0.06);
+    @apply rounded-xl bg-white border border-purple-100/90 transition-all duration-150;
+    box-shadow: 0 1px 3px 0 rgba(88, 28, 135, 0.04), 0 1px 2px -1px rgba(88, 28, 135, 0.02);
   }
 
   .card-interactive {
-    @apply rounded-2xl bg-[#FFFCFE] border border-[#E8CEE6] hover:border-[#D9AED5] transition-all duration-200;
-    background-image: none;
-    box-shadow:
-      0 2px 0 0 #f6e7f5,
-      0 5px 0 -1px #fffafd,
-      0 5px 0 0 #e9cfe7,
-      0 12px 28px -4px rgba(150, 36, 111, 0.09);
+    @apply rounded-xl bg-white border border-purple-100 hover:border-purple-300 hover:shadow-sm transition-all duration-150;
   }
 
   .card-accent {
-    @apply rounded-2xl bg-gradient-to-r from-[#FDF2F8] via-[#FCF6FF] to-[#F3E8FF] border border-[#E6C6E4] transition-all duration-200;
-    box-shadow: 0 6px 20px -4px rgba(150, 36, 111, 0.06);
+    @apply rounded-xl bg-gradient-to-r from-purple-50/50 via-white to-purple-50/50 border border-purple-200/80 transition-all duration-150;
+    box-shadow: 0 1px 3px 0 rgba(88, 28, 135, 0.03);
   }
 
-  /* ── Light Green Important Action Buttons ─────────────────────── */
+  /* ── Clean Action Buttons (Purple, White & Black) ──────────────── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-normal text-xs sm:text-sm
-           text-[#0F4C2A] bg-gradient-to-b from-[#D1FAE5] to-[#A7F3D0] hover:from-[#BBF7D0] hover:to-[#86EFAC]
-           border border-[#6EE7B7] hover:-translate-y-[1px] active:translate-y-0
-           transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399]/40
-           whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.75),
-      0 2px 6px rgba(16, 185, 129, 0.14);
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg font-semibold text-xs sm:text-sm
+           text-white bg-purple-700 hover:bg-purple-800 active:bg-black
+           border border-purple-700 hover:border-purple-800
+           transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50
+           whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-normal text-xs sm:text-sm
-           text-[#96246F] bg-[#FDF4F9] hover:bg-[#FCE8F4] border border-[#F0C6E4]
-           transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/30
-           whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg font-medium text-xs sm:text-sm
+           text-black bg-white hover:bg-purple-50 active:bg-purple-100 border border-purple-200 hover:border-purple-300
+           transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/40
+           whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl font-normal text-xs sm:text-sm
-           text-slate-700 bg-white/90 hover:bg-[#FDF4F9] border border-[#EAD4E8] hover:border-[#D9B2D6]
-           transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/30
+    @apply inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg font-medium text-xs sm:text-sm
+           text-purple-900 hover:text-black hover:bg-purple-100 active:bg-purple-200
+           transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/40
            whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   /* ── Official Google Sign-In Button Style ─────────────────────── */
   .gsi-material-button {
-    @apply inline-flex items-center justify-center bg-white border border-[#dadce0] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#3c4043] hover:bg-[#f8f9fa] transition-all shadow-sm cursor-pointer shrink-0;
+    @apply inline-flex items-center justify-center bg-white border border-[#dadce0] rounded-lg px-3.5 py-2 text-xs sm:text-sm text-[#3c4043] hover:bg-[#f8f9fa] transition-all shadow-xs cursor-pointer shrink-0;
   }
   .gsi-material-button-content-wrapper {
     @apply flex items-center gap-2.5;
@@ -201,103 +138,88 @@
 
   /* ── Form Elements ────────────────────────────────────────────── */
   .input {
-    @apply w-full px-3.5 py-2 rounded-xl font-sans text-sm text-slate-900 placeholder-slate-400
-           bg-white/95 border border-[#E8CEE6] transition-colors duration-150;
+    @apply w-full px-3 py-2 rounded-lg font-sans text-sm text-black placeholder-slate-400
+           bg-white border border-purple-200 transition-colors duration-150;
   }
   .input:focus {
-    @apply outline-none border-brand-500 ring-2 ring-brand-400/15 bg-white;
+    @apply outline-none border-purple-600 ring-2 ring-purple-600/15 bg-white;
   }
 
   .label {
-    @apply block text-xs font-normal text-slate-700 mb-1.5;
+    @apply block text-xs font-semibold text-purple-950 mb-1.5;
   }
 
   /* ── Progress ─────────────────────────────────────────────────── */
   .progress-bar {
-    @apply h-1.5 rounded-full overflow-hidden bg-[#F5E8F3];
+    @apply h-1.5 rounded-full overflow-hidden bg-purple-100;
   }
   .progress-fill {
-    @apply h-full rounded-full bg-gradient-to-r from-[#E779C1] to-[#A855F7] transition-all duration-500 ease-out;
+    @apply h-full rounded-full bg-purple-700 transition-all duration-500 ease-out;
   }
 
   /* ── Dividers ─────────────────────────────────────────────────── */
   .divider-line {
-    @apply h-px bg-[#EAD4E8];
+    @apply h-px bg-purple-100;
   }
 
   /* ── Stats ────────────────────────────────────────────────────── */
   .stat-number {
-    @apply text-2xl sm:text-3xl font-normal text-slate-900 font-mono tabular-nums tracking-tight;
+    @apply text-2xl sm:text-3xl font-bold text-black font-mono tabular-nums tracking-tight;
   }
 
   /* ── Alerts ───────────────────────────────────────────────────── */
   .alert-info {
-    @apply p-3 rounded-xl border text-xs font-normal bg-[#FDF4F9] border-[#F3CBE6] text-brand-800;
+    @apply p-3 rounded-lg border text-xs font-normal bg-purple-50 border-purple-200 text-purple-900;
   }
   .alert-warning {
-    @apply p-3 rounded-xl border text-xs font-normal bg-[#FAF5FF] border-[#E9D5FF] text-indigo-800;
+    @apply p-3 rounded-lg border text-xs font-normal bg-amber-50/70 border-amber-200 text-amber-900;
   }
   .alert-success {
-    @apply p-3 rounded-xl border text-xs font-normal bg-[#ECFDF5] border-[#A7F3D0] text-[#0F4C2A];
+    @apply p-3 rounded-lg border text-xs font-normal bg-emerald-50/70 border-emerald-200 text-emerald-900;
   }
 
-  /* ── Priority Urgency Badges ──────────────────────────────────── */
+  /* ── Priority Urgency Badges (Purple, White & Black) ──────────── */
   .badge-high {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xl text-[11px] leading-4 border bg-rose-50 text-rose-700 border-rose-200/90 whitespace-nowrap shrink-0;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-semibold border bg-purple-900 text-white border-purple-950 whitespace-nowrap shrink-0;
   }
   .badge-medium {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xl text-[11px] leading-4 border bg-amber-50 text-amber-700 border-amber-200/90 whitespace-nowrap shrink-0;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-medium border bg-purple-100 text-purple-900 border-purple-300 whitespace-nowrap shrink-0;
   }
   .badge-low {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xl text-[11px] leading-4 border bg-emerald-50 text-emerald-700 border-emerald-200/90 whitespace-nowrap shrink-0;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-medium border bg-black text-white border-black whitespace-nowrap shrink-0;
   }
 
   /* ── Empty States ─────────────────────────────────────────────── */
   .empty-state {
-    @apply card flex flex-col items-center justify-center py-14 px-6 text-center;
+    @apply card flex flex-col items-center justify-center py-12 px-6 text-center;
   }
 
   /* ── Skeleton Loader ──────────────────────────────────────────── */
   .skeleton {
-    @apply rounded-2xl bg-[#F5E8F3]/70 animate-pulse;
+    @apply rounded-lg bg-purple-100/60 animate-pulse;
   }
 }
 
 @layer utilities {
-  .font-sans,
-  .font-display,
-  .font-mono,
-  .font-serif,
-  .font-normal,
-  .font-medium,
-  .font-semibold,
-  .font-bold {
-    font-family: 'Playfair Display', Georgia, serif !important;
-    font-weight: 400 !important;
-  }
-
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
 
   .animate-check-pop {
-    animation: check-pop 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: check-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   .animate-check-draw {
-    animation: check-draw 280ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: check-draw 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 }
 
 @keyframes check-pop {
   0% {
-    transform: scale(0.82);
+    transform: scale(0.85);
   }
-  45% {
-    transform: scale(1.2);
-  }
-  75% {
-    transform: scale(0.96);
+  50% {
+    transform: scale(1.15);
   }
   100% {
     transform: scale(1);
@@ -307,7 +229,7 @@
 @keyframes check-draw {
   0% {
     stroke-dashoffset: 16;
-    opacity: 0.4;
+    opacity: 0.3;
   }
   100% {
     stroke-dashoffset: 0;

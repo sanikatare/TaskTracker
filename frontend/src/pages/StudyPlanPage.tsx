@@ -31,43 +31,43 @@ function PlanSectionCard({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-slate-50/70 transition-colors text-left"
+        className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-purple-50/70 transition-colors text-left"
       >
         <div className="flex items-center gap-3 min-w-0">
-          <span className="text-xs font-mono tabular-nums font-semibold text-brand-600 shrink-0">
+          <span className="text-xs font-mono tabular-nums font-bold text-purple-700 shrink-0">
             0{index + 1}.
           </span>
-          <span className="text-sm font-semibold text-slate-900 truncate">
+          <span className="text-sm font-bold text-black truncate">
             {section.title}
           </span>
-          <span className="text-xs font-mono tabular-nums text-slate-500 shrink-0">
+          <span className="text-xs font-mono tabular-nums text-purple-900/60 shrink-0 font-medium">
             · {section.duration}
           </span>
         </div>
-        <div className="text-slate-400 shrink-0 ml-2">
+        <div className="text-purple-400 shrink-0 ml-2">
           {open ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </div>
       </button>
 
       {open && (
-        <div className="px-5 pb-4 pt-2 space-y-3 border-t border-slate-100">
+        <div className="px-5 pb-4 pt-2 space-y-3 border-t border-purple-100">
           {section.topics.length > 0 && (
             <div>
-              <div className="text-xs font-medium text-slate-500 mb-1">Key Topics</div>
-              <div className="text-xs text-slate-700">
+              <div className="text-xs font-bold text-black mb-1">Key Topics</div>
+              <div className="text-xs text-purple-950/80 font-medium">
                 {section.topics.join(' · ')}
               </div>
             </div>
           )}
           {section.activities.length > 0 && (
             <div>
-              <div className="text-xs font-medium text-slate-500 mb-1.5">
+              <div className="text-xs font-bold text-black mb-1.5">
                 Action Steps
               </div>
               <ul className="space-y-1.5">
                 {section.activities.map((a, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                    <span className="text-slate-400 font-mono tabular-nums text-xs mt-0.5">
+                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-black">
+                    <span className="text-purple-400 font-mono tabular-nums text-xs mt-0.5 font-semibold">
                       {i + 1}.
                     </span>
                     <span>{a}</span>
@@ -97,13 +97,13 @@ function TaskSelectorItem({
       onClick={onSelect}
       className={clsx(
         'w-full text-left px-4 py-3.5 transition-colors flex items-start gap-3',
-        selected ? 'bg-brand-50/70' : 'hover:bg-slate-50'
+        selected ? 'bg-purple-100/70' : 'hover:bg-purple-50'
       )}
     >
       <div
         className={clsx(
           'mt-1 w-4 h-4 rounded-full border flex items-center justify-center shrink-0',
-          selected ? 'border-brand-600 bg-brand-600' : 'border-slate-300'
+          selected ? 'border-purple-700 bg-purple-700' : 'border-purple-200'
         )}
       >
         {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -111,23 +111,23 @@ function TaskSelectorItem({
       <div className="flex-1 min-w-0">
         <div
           className={clsx(
-            'text-sm font-medium truncate',
-            selected ? 'text-brand-700 font-semibold' : 'text-slate-900'
+            'text-sm font-semibold truncate',
+            selected ? 'text-purple-950 font-bold' : 'text-black'
           )}
         >
           {task.title}
         </div>
-        <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 mt-1">
+        <div className="flex flex-wrap items-center gap-1.5 text-xs text-purple-900/60 mt-1 font-medium">
           <span>{task.subject}</span>
           <span aria-hidden="true">·</span>
           <span
             className={clsx(
-              'font-medium',
+              'font-semibold',
               task.priority === 'high'
-                ? 'text-red-600'
+                ? 'text-purple-900 font-bold'
                 : task.priority === 'medium'
-                ? 'text-amber-600'
-                : 'text-emerald-600'
+                ? 'text-purple-700'
+                : 'text-black'
             )}
           >
             {PRIORITY_CONFIG[task.priority].label}
@@ -135,7 +135,7 @@ function TaskSelectorItem({
           <span aria-hidden="true">·</span>
           <span className="font-mono tabular-nums">{deadlineLabel(task.deadline)}</span>
           <span aria-hidden="true">·</span>
-          <span className="font-mono tabular-nums">
+          <span className="font-mono tabular-nums font-semibold text-black">
             {hoursToReadable(task.estimatedHours)}
           </span>
         </div>
@@ -231,14 +231,14 @@ export default function StudyPlanPage() {
         {/* Left Column: Task Selector */}
         <div className="lg:col-span-2 space-y-3">
           <div className="card overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-800">
+            <div className="px-4 py-3 border-b border-purple-100 bg-white flex items-center justify-between">
+              <span className="text-xs font-bold text-black">
                 Active Tasks ({pendingTasks.length})
               </span>
               <button
                 type="button"
                 onClick={() => navigate('/tasks?new=1')}
-                className="text-xs font-medium text-brand-600 hover:text-brand-700 inline-flex items-center gap-1"
+                className="text-xs font-bold text-purple-700 hover:text-black inline-flex items-center gap-1"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>New</span>
@@ -247,14 +247,14 @@ export default function StudyPlanPage() {
 
             {pendingTasks.length === 0 ? (
               <div className="p-8 text-center">
-                <BookOpen className="w-5 h-5 text-slate-400 mx-auto mb-2" />
-                <div className="text-sm font-medium text-slate-700">No active tasks</div>
-                <p className="text-xs text-slate-500 mt-1">
+                <BookOpen className="w-5 h-5 text-purple-400 mx-auto mb-2" />
+                <div className="text-sm font-bold text-black">No active tasks</div>
+                <p className="text-xs text-purple-900/60 mt-1 font-medium">
                   Create a task first to generate a tailored study roadmap.
                 </p>
               </div>
             ) : (
-              <div className="divide-y divide-slate-100">
+              <div className="divide-y divide-purple-100">
                 {pendingTasks.map((task) => (
                   <TaskSelectorItem
                     key={task._id}
@@ -272,21 +272,21 @@ export default function StudyPlanPage() {
         <div className="lg:col-span-3">
           {!selectedTaskId ? (
             <div className="empty-state py-16">
-              <BookOpen className="w-6 h-6 text-slate-400 mb-2.5" />
-              <div className="text-sm font-semibold text-slate-800">
+              <BookOpen className="w-6 h-6 text-purple-400 mb-2.5" />
+              <div className="text-sm font-bold text-black">
                 Select a task to view its study plan
               </div>
-              <p className="text-xs text-slate-500 mt-1 max-w-xs">
+              <p className="text-xs text-purple-900/60 mt-1 max-w-xs font-medium">
                 Choose any active assignment from the left panel to generate a phase-by-phase breakdown.
               </p>
             </div>
           ) : planLoading || isGenerating ? (
             <div className="card flex flex-col items-center justify-center py-16">
-              <Loader2 className="w-6 h-6 text-brand-600 animate-spin mb-3" />
-              <div className="text-sm font-semibold text-slate-800">
+              <Loader2 className="w-6 h-6 text-purple-700 animate-spin mb-3" />
+              <div className="text-sm font-bold text-black">
                 {isGenerating ? 'Building your personalized study roadmap...' : 'Loading study plan...'}
               </div>
-              <div className="text-xs text-slate-500 mt-1">
+              <div className="text-xs text-purple-900/60 mt-1 font-medium">
                 Structuring milestones and time allocations
               </div>
             </div>
@@ -295,20 +295,20 @@ export default function StudyPlanPage() {
               {/* Plan Summary Header */}
               <div className="card p-5 sm:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <div className="text-xs font-semibold text-brand-600">
+                  <div className="text-xs font-bold text-purple-700">
                     {selectedTask?.subject ?? 'Study Roadmap'}
                   </div>
-                  <div className="text-xs text-slate-500 font-mono tabular-nums">
+                  <div className="text-xs text-purple-900/60 font-mono tabular-nums font-semibold">
                     {plan.estimatedDays} day plan · {plan.breakdown.length} phases · Updated{' '}
                     {formatDate(plan.generatedAt, 'MMM d')}
                   </div>
                 </div>
                 {selectedTask && (
-                  <h2 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+                  <h2 className="text-base sm:text-lg font-bold text-black mb-2">
                     {selectedTask.title}
                   </h2>
                 )}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-purple-950 leading-relaxed font-normal">
                   {plan.planText}
                 </p>
               </div>
@@ -316,12 +316,12 @@ export default function StudyPlanPage() {
               {/* Checkable Daily Goals */}
               {plan.dailyGoals.length > 0 && (
                 <div className="card overflow-hidden">
-                  <div className="px-5 py-3.5 border-b border-slate-200/80 bg-slate-50/50">
-                    <h3 className="text-xs font-semibold text-slate-900">
+                  <div className="px-5 py-3.5 border-b border-purple-100 bg-white">
+                    <h3 className="text-xs font-bold text-black">
                       Daily Milestones
                     </h3>
                   </div>
-                  <div className="divide-y divide-slate-100">
+                  <div className="divide-y divide-purple-100">
                     {plan.dailyGoals.map((goal, i) => {
                       const key = `${selectedTaskId}-goal-${i}`;
                       const isDone = Boolean(checkedGoals[key]);
@@ -332,14 +332,14 @@ export default function StudyPlanPage() {
                           onClick={() =>
                             setCheckedGoals((prev) => ({ ...prev, [key]: !prev[key] }))
                           }
-                          className="w-full flex items-start gap-3 px-5 py-3.5 hover:bg-slate-50/70 transition-colors text-left"
+                          className="w-full flex items-start gap-3 px-5 py-3.5 hover:bg-purple-50/70 transition-colors text-left"
                         >
                           <div
                             className={clsx(
                               'mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-colors',
                               isDone
-                                ? 'bg-emerald-600 border-emerald-600 text-white'
-                                : 'border-slate-300 bg-white'
+                                ? 'bg-purple-700 border-purple-700 text-white'
+                                : 'border-purple-300 bg-white'
                             )}
                           >
                             {isDone && <Check className="w-3 h-3" />}
@@ -347,7 +347,7 @@ export default function StudyPlanPage() {
                           <span
                             className={clsx(
                               'text-xs sm:text-sm',
-                              isDone ? 'line-through text-slate-400' : 'text-slate-800'
+                              isDone ? 'line-through text-purple-400' : 'text-black font-medium'
                             )}
                           >
                             {goal}
@@ -361,7 +361,7 @@ export default function StudyPlanPage() {
 
               {/* Phase Breakdown */}
               <div className="space-y-2.5">
-                <div className="text-xs font-semibold text-slate-700 px-1">
+                <div className="text-xs font-bold text-black px-1">
                   Execution Phases
                 </div>
                 {plan.breakdown.map((section, i) => (
@@ -372,16 +372,16 @@ export default function StudyPlanPage() {
               {/* Recommended Resources */}
               {plan.resources.length > 0 && (
                 <div className="card p-5">
-                  <h3 className="text-xs font-semibold text-slate-900 mb-3">
+                  <h3 className="text-xs font-bold text-black mb-3">
                     Recommended Reference Material
                   </h3>
                   <ul className="space-y-2">
                     {plan.resources.map((r, i) => (
                       <li
                         key={i}
-                        className="text-xs sm:text-sm text-slate-600 flex items-start gap-2"
+                        className="text-xs sm:text-sm text-purple-950 flex items-start gap-2"
                       >
-                        <span className="font-mono tabular-nums text-slate-400 text-xs mt-0.5">
+                        <span className="font-mono tabular-nums text-purple-400 text-xs mt-0.5 font-bold">
                           0{i + 1}.
                         </span>
                         <span>{r}</span>
@@ -393,18 +393,18 @@ export default function StudyPlanPage() {
             </div>
           ) : (
             <div className="empty-state py-16">
-              <BookOpen className="w-6 h-6 text-slate-400 mb-2.5" />
-              <div className="text-sm font-semibold text-slate-800">
+              <BookOpen className="w-6 h-6 text-purple-400 mb-2.5" />
+              <div className="text-sm font-bold text-black">
                 No study plan generated for this task yet
               </div>
-              <p className="text-xs text-slate-500 mt-1 max-w-sm">
+              <p className="text-xs text-purple-900/60 mt-1 max-w-sm font-medium">
                 Generate a tailored multi-phase breakdown with daily milestones and recommended study resources.
               </p>
               <button
                 type="button"
                 onClick={() => generatePlanMutation.mutate(selectedTaskId)}
                 disabled={isGenerating}
-                className="btn-primary mt-4"
+                className="btn-primary mt-4 font-semibold"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Generate Study Plan</span>

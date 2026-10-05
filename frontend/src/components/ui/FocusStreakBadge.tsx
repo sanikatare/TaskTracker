@@ -108,12 +108,12 @@ export default function FocusStreakBadge({
       <div
         className={clsx(
           'inline-flex items-center gap-1.5 text-xs select-none',
-          isActive ? 'text-[#B8328A]' : 'text-slate-500',
+          isActive ? 'text-purple-700 font-semibold' : 'text-purple-900/60',
           className
         )}
       >
-        <Sparkles className="w-3.5 h-3.5 text-[#C83E8B] shrink-0" />
-        <span className="tabular-nums text-slate-900">{effectiveStreak}d streak</span>
+        <Sparkles className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+        <span className="tabular-nums text-black font-semibold">{effectiveStreak}d streak</span>
       </div>
     );
   }
@@ -121,13 +121,13 @@ export default function FocusStreakBadge({
   return (
     <div
       className={clsx(
-        'card px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4',
+        'card px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-purple-100',
         className
       )}
     >
       {/* Left: Simple Streak Summary */}
       <div className="flex items-center gap-3.5">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#FDF4F9] border border-[#F3CBE6] text-[#C83E8B]">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-purple-50 border border-purple-200 text-purple-700">
           <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
             <circle cx="9" cy="10" r="1.3" fill="currentColor" />
             <circle cx="15" cy="10" r="1.3" fill="currentColor" />
@@ -141,10 +141,10 @@ export default function FocusStreakBadge({
         </div>
 
         <div>
-          <div className="text-base text-slate-900 tabular-nums">
+          <div className="text-base text-black font-bold tabular-nums">
             {effectiveStreak} {effectiveStreak === 1 ? 'Day Streak' : 'Days Streak'}
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-purple-900/70 mt-0.5">
             {completedTodayProp ?? completedToday
               ? 'Today’s focus check-in is complete'
               : 'Complete a task today to keep your streak going'}
@@ -152,7 +152,7 @@ export default function FocusStreakBadge({
         </div>
       </div>
 
-      {/* Right: Clean 7-Day Pastel Circles */}
+      {/* Right: Clean 7-Day Purple/Black Circles */}
       <div className="flex items-center gap-2 self-start sm:self-center">
         {last7Days.map((day) => (
           <div
@@ -164,14 +164,14 @@ export default function FocusStreakBadge({
               className={clsx(
                 'w-7 h-7 rounded-full flex items-center justify-center text-xs border transition-all',
                 day.active
-                  ? 'bg-[#FCE7F3] border-[#F3A9D8] text-[#B8328A]'
+                  ? 'bg-purple-700 border-purple-700 text-white shadow-xs'
                   : day.isToday
-                  ? 'bg-white border-dashed border-[#E779C1] text-[#B8328A]'
-                  : 'bg-[#FCF8FB] border-[#F0DFEE] text-slate-300'
+                  ? 'bg-white border-dashed border-purple-500 text-purple-700 font-semibold'
+                  : 'bg-purple-50/50 border-purple-100 text-purple-300'
               )}
             >
               {day.active ? (
-                <Check className="w-3.5 h-3.5 stroke-[2]" />
+                <Check className="w-3.5 h-3.5 stroke-[2.2]" />
               ) : (
                 <span className="w-1.5 h-1.5 rounded-full bg-current" />
               )}
@@ -179,7 +179,7 @@ export default function FocusStreakBadge({
             <span
               className={clsx(
                 'text-[10px] tabular-nums',
-                day.isToday ? 'text-[#B8328A]' : 'text-slate-400'
+                day.isToday ? 'text-purple-700 font-bold' : 'text-purple-900/60 font-medium'
               )}
             >
               {day.dayShort}

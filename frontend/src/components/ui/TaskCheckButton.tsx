@@ -57,8 +57,8 @@ export default function TaskCheckButton({
         'relative rounded-lg border flex items-center justify-center shrink-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/40 focus-visible:ring-offset-1',
         size === 'sm' ? 'w-4 h-4' : 'w-5 h-5',
         isVisuallyChecked
-          ? 'bg-gradient-to-br from-[#D44FA6] to-[#9333EA] border-[#B8328A] text-white shadow-xs'
-          : 'border-[#DEC0DC] hover:border-[#D44FA6] hover:bg-[#FDF4F9] bg-[#FFFBFD] text-transparent',
+          ? 'bg-purple-700 border-purple-700 text-white shadow-xs'
+          : 'border-purple-300 hover:border-purple-600 hover:bg-purple-50 bg-white text-transparent',
         animatingCheck && 'animate-check-pop',
         disabled && 'opacity-60 cursor-not-allowed',
         className

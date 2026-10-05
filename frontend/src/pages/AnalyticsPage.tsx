@@ -37,37 +37,37 @@ const CHART_DEFAULTS = {
   plugins: {
     legend: {
       labels: {
-        color: '#6E476C',
-        font: { family: '"Playfair Display", Georgia, serif', size: 11, weight: 'normal' as const },
+        color: '#64748B',
+        font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', size: 11, weight: '500' as const },
         padding: 14,
         usePointStyle: true,
         pointStyleWidth: 8,
       },
     },
     tooltip: {
-      backgroundColor: '#2A122B',
-      borderColor: '#543253',
+      backgroundColor: '#0F172A',
+      borderColor: '#334155',
       borderWidth: 1,
-      titleColor: '#FDF2F8',
-      bodyColor: '#F9CEE9',
-      titleFont: { family: '"Playfair Display", Georgia, serif', weight: 'normal' as const, size: 12 },
-      bodyFont: { family: '"Playfair Display", Georgia, serif', weight: 'normal' as const, size: 11 },
+      titleColor: '#FFFFFF',
+      bodyColor: '#E2E8F0',
+      titleFont: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: '600' as const, size: 12 },
+      bodyFont: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 },
       padding: 10,
       boxPadding: 5,
-      cornerRadius: 10,
+      cornerRadius: 8,
       displayColors: true,
       usePointStyle: true,
     },
   },
   scales: {
     x: {
-      ticks: { color: '#8D648A', font: { family: '"Playfair Display", Georgia, serif', weight: 'normal' as const, size: 11 } },
-      grid: { color: '#F8EDF6', drawBorder: false },
+      ticks: { color: '#64748B', font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 } },
+      grid: { color: '#F1F5F9', drawBorder: false },
       border: { display: false },
     },
     y: {
-      ticks: { color: '#8D648A', font: { family: '"Playfair Display", Georgia, serif', weight: 'normal' as const, size: 11 } },
-      grid: { color: '#F8EDF6', drawBorder: false },
+      ticks: { color: '#64748B', font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 } },
+      grid: { color: '#F1F5F9', drawBorder: false },
       border: { display: false },
     },
   },
@@ -106,13 +106,13 @@ export default function AnalyticsPage() {
       {
         label: 'Completed Blocks',
         data: (analytics?.weeklyProgress ?? []).map((w) => w.completed),
-        backgroundColor: '#D645A6',
+        backgroundColor: '#7E22CE',
         borderRadius: 6,
       },
       {
         label: 'Planned Blocks',
         data: (analytics?.weeklyProgress ?? []).map((w) => w.planned),
-        backgroundColor: '#E9D5FF',
+        backgroundColor: '#000000',
         borderRadius: 6,
       },
     ],
@@ -125,12 +125,12 @@ export default function AnalyticsPage() {
         label: 'Study Hours',
         data: (analytics?.weeklyProgress ?? []).map((w) => w.studyHours),
         fill: true,
-        backgroundColor: 'rgba(214, 69, 166, 0.12)',
-        borderColor: '#BA2D8B',
+        backgroundColor: 'rgba(126, 34, 206, 0.12)',
+        borderColor: '#7E22CE',
         borderWidth: 2,
         tension: 0.35,
-        pointBackgroundColor: '#FFFBFD',
-        pointBorderColor: '#BA2D8B',
+        pointBackgroundColor: '#FFFFFF',
+        pointBorderColor: '#7E22CE',
         pointBorderWidth: 2,
         pointRadius: 3.5,
         pointHoverRadius: 5,
@@ -140,12 +140,12 @@ export default function AnalyticsPage() {
 
   const subjectLabels = Object.keys(analytics?.tasksBySubject ?? {});
   const subjectColors = [
-    '#D645A6',
+    '#581C87',
+    '#7E22CE',
     '#9333EA',
-    '#E874C0',
     '#A855F7',
-    '#7E1C5D',
-    '#F4A6D7',
+    '#C084FC',
+    '#000000',
   ];
   const doughnutData = {
     labels: subjectLabels,
@@ -172,36 +172,36 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Top KPI Strip (Tabular Numerals) */}
-      <div className="card grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#F0DFEE]">
+      <div className="card grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-purple-100">
         <div className="p-5">
-          <div className="text-xs font-medium text-slate-500">Completion Rate</div>
-          <div className="stat-number mt-2">{completionRate.toFixed(0)}%</div>
-          <div className="text-xs text-slate-500 mt-1 font-mono tabular-nums">
+          <div className="text-xs font-bold text-purple-900/70">Completion Rate</div>
+          <div className="stat-number mt-2 text-black">{completionRate.toFixed(0)}%</div>
+          <div className="text-xs text-purple-900/60 mt-1 font-mono tabular-nums font-medium">
             {analytics?.completedTasks ?? 0} of {analytics?.totalTasks ?? 0} tasks completed
           </div>
         </div>
 
         <div className="p-5">
-          <div className="text-xs font-medium text-slate-500">Total Study Hours</div>
-          <div className="stat-number mt-2">
+          <div className="text-xs font-bold text-purple-900/70">Total Study Hours</div>
+          <div className="stat-number mt-2 text-black">
             {hoursToReadable(analytics?.totalStudyHours ?? 0)}
           </div>
-          <div className="text-xs text-slate-500 mt-1">Logged across study sessions</div>
+          <div className="text-xs text-purple-900/60 mt-1 font-medium">Logged across study sessions</div>
         </div>
 
         <div className="p-5">
-          <div className="text-xs font-medium text-slate-500">Avg. Focus Score</div>
-          <div className="stat-number mt-2">
+          <div className="text-xs font-bold text-purple-900/70">Avg. Focus Score</div>
+          <div className="stat-number mt-2 text-black">
             {(analytics?.avgProductivityScore ?? 0).toFixed(1)}
-            <span className="text-sm font-normal text-slate-400">/10</span>
+            <span className="text-sm font-semibold text-purple-400">/10</span>
           </div>
-          <div className="text-xs text-slate-500 mt-1">Self-reported & inferred</div>
+          <div className="text-xs text-purple-900/60 mt-1 font-medium">Self-reported & inferred</div>
         </div>
 
         <div className="p-5">
-          <div className="text-xs font-medium text-slate-500">Study Streak</div>
-          <div className="stat-number mt-2">{analytics?.streakDays ?? 0}d</div>
-          <div className="text-xs text-slate-500 mt-1">Consecutive active days</div>
+          <div className="text-xs font-bold text-purple-900/70">Study Streak</div>
+          <div className="stat-number mt-2 text-black">{analytics?.streakDays ?? 0}d</div>
+          <div className="text-xs text-purple-900/60 mt-1 font-medium">Consecutive active days</div>
         </div>
       </div>
 
@@ -210,10 +210,10 @@ export default function AnalyticsPage() {
         {/* Weekly Completions */}
         <div className="card p-5 sm:p-6">
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-slate-900">
+            <h2 className="text-base font-bold text-black">
               Weekly Block Execution
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-purple-900/60 mt-0.5 font-medium">
               Completed vs. planned study blocks over the past 7 days
             </p>
           </div>
@@ -238,8 +238,8 @@ export default function AnalyticsPage() {
         {/* Daily Study Hours */}
         <div className="card p-5 sm:p-6">
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-slate-900">Daily Study Hours</h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h2 className="text-base font-bold text-black">Daily Study Hours</h2>
+            <p className="text-xs text-purple-900/60 mt-0.5 font-medium">
               Focused hours logged per day over the past week
             </p>
           </div>
@@ -261,10 +261,10 @@ export default function AnalyticsPage() {
         {/* Tasks by Subject */}
         <div className="card p-5 sm:p-6">
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-slate-900">
+            <h2 className="text-base font-bold text-black">
               Workload by Subject
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-purple-900/60 mt-0.5 font-medium">
               Task distribution across enrolled courses
             </p>
           </div>
@@ -290,7 +290,7 @@ export default function AnalyticsPage() {
               />
             </div>
           ) : (
-            <div className="h-56 flex items-center justify-center text-xs text-slate-500">
+            <div className="h-56 flex items-center justify-center text-xs text-purple-900/60 font-medium">
               No subject data available yet.
             </div>
           )}
@@ -299,8 +299,8 @@ export default function AnalyticsPage() {
         {/* Task Status Breakdown */}
         <div className="card p-5 sm:p-6">
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-slate-900">Status Distribution</h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h2 className="text-base font-bold text-black">Status Distribution</h2>
+            <p className="text-xs text-purple-900/60 mt-0.5 font-medium">
               Breakdown of tasks by current workflow stage
             </p>
           </div>
@@ -309,7 +309,7 @@ export default function AnalyticsPage() {
               {
                 label: 'Completed',
                 value: analytics?.completedTasks ?? 0,
-                color: '#C83E8B',
+                color: '#000000',
               },
               {
                 label: 'Pending & In Progress',
@@ -317,12 +317,12 @@ export default function AnalyticsPage() {
                   (analytics?.totalTasks ?? 0) -
                   (analytics?.completedTasks ?? 0) -
                   (analytics?.skippedTasks ?? 0),
-                color: '#A855F7',
+                color: '#7E22CE',
               },
               {
                 label: 'Skipped',
                 value: analytics?.skippedTasks ?? 0,
-                color: '#E9D5FF',
+                color: '#D8B4FE',
               },
             ].map((item) => {
               const total = Math.max(1, analytics?.totalTasks ?? 1);
@@ -330,12 +330,12 @@ export default function AnalyticsPage() {
               return (
                 <div key={item.label}>
                   <div className="flex justify-between items-center text-xs mb-1.5">
-                    <span className="font-medium text-slate-700">{item.label}</span>
-                    <span className="font-mono tabular-nums text-slate-600">
+                    <span className="font-bold text-black">{item.label}</span>
+                    <span className="font-mono tabular-nums text-purple-950 font-semibold">
                       {item.value} ({pct.toFixed(0)}%)
                     </span>
                   </div>
-                  <div className="progress-bar h-2">
+                  <div className="progress-bar h-2 bg-purple-100">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{ width: `${pct}%`, background: item.color }}

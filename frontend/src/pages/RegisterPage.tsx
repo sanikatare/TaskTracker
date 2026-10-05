@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, User, Clock, ArrowRight } from 'lucide-react';
+import { Mail, Lock, User, Clock, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function RegisterPage() {
@@ -40,22 +40,22 @@ export default function RegisterPage() {
       <div className="auth-panel">
         <div>
           <div className="flex items-center gap-2.5 mb-14">
-            <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
-              <GraduationCap className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-lg bg-black border border-purple-900/60 flex items-center justify-center text-purple-400 font-bold text-sm">
+              T
             </div>
-            <span className="text-base font-semibold tracking-tight text-white">
-              StudyAI
+            <span className="text-base font-bold tracking-tight text-white">
+              TaskTrack <span className="text-purple-400">AI</span>
             </span>
           </div>
-          <h1 className="text-3xl xl:text-4xl font-semibold leading-tight text-white tracking-tight max-w-md">
+          <h1 className="text-3xl xl:text-4xl font-extrabold leading-tight text-white tracking-tight max-w-md">
             Build a realistic study rhythm this semester.
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-md leading-relaxed mt-4">
-            Set your available daily study hours and let StudyAI break down complex coursework into manageable daily blocks.
+          <p className="text-purple-200 text-sm sm:text-base max-w-md leading-relaxed mt-4">
+            Set your available daily study hours and let TaskTrack AI break down complex coursework into manageable daily blocks.
           </p>
         </div>
 
-        <div className="space-y-4 border-t border-slate-800 pt-8 text-xs text-slate-400">
+        <div className="space-y-4 border-t border-purple-900/50 pt-8 text-xs text-purple-300">
           <div>01. Personalized daily study capacity and deadline alerts</div>
           <div>02. Automatic time estimation based on subject and difficulty</div>
           <div>03. Weekly completion analytics and streak tracking</div>
@@ -65,9 +65,18 @@ export default function RegisterPage() {
       {/* Right Register Form */}
       <div className="flex-1 flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-md">
-          <div className="card p-7 sm:p-8">
-            <h2 className="text-lg font-semibold text-slate-900">Create your account</h2>
-            <p className="text-xs text-slate-500 mt-1 mb-6">
+          <div className="lg:hidden flex items-center gap-2.5 mb-8">
+            <div className="w-8 h-8 rounded-lg bg-black border border-purple-900/60 flex items-center justify-center text-purple-400 font-bold text-sm">
+              T
+            </div>
+            <span className="text-base font-bold text-black">
+              TaskTrack <span className="text-purple-700">AI</span>
+            </span>
+          </div>
+
+          <div className="card p-7 sm:p-8 border border-purple-200 shadow-xl">
+            <h2 className="text-xl font-bold text-black tracking-tight">Create your account</h2>
+            <p className="text-xs text-purple-900/70 mt-1 mb-6 font-medium">
               Set up your student workspace in seconds
             </p>
 
@@ -75,7 +84,7 @@ export default function RegisterPage() {
               <div>
                 <label className="label">Full Name</label>
                 <div className="relative">
-                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
                   <input
                     type="text"
                     value={form.displayName}
@@ -89,7 +98,7 @@ export default function RegisterPage() {
               <div>
                 <label className="label">University Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
                   <input
                     type="email"
                     value={form.email}
@@ -103,7 +112,7 @@ export default function RegisterPage() {
               <div>
                 <label className="label">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
                   <input
                     type="password"
                     value={form.password}
@@ -118,7 +127,7 @@ export default function RegisterPage() {
               <div>
                 <label className="label">Available Study Hours per Day</label>
                 <div className="relative">
-                  <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
                   <input
                     type="number"
                     value={form.studyHoursPerDay}
@@ -133,17 +142,17 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary w-full py-2.5 mt-1"
+                className="btn-primary w-full py-2.5 mt-1 font-bold"
               >
                 {loading ? 'Creating account...' : 'Create Account'}
               </button>
             </form>
 
-            <p className="text-center text-xs text-slate-500 mt-6">
+            <p className="text-center text-xs text-purple-900/70 mt-6 font-medium">
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="font-semibold text-brand-600 hover:text-brand-700 inline-flex items-center gap-1"
+                className="font-bold text-purple-700 hover:text-black inline-flex items-center gap-1"
               >
                 Sign in <ArrowRight className="w-3 h-3" />
               </Link>

@@ -163,7 +163,7 @@ function TaskForm({
       {/* Priority Segmented Selector */}
       <div>
         <label className="label">Priority</label>
-        <div className="grid grid-cols-3 gap-2 p-1 bg-[#F7ECF5] border border-[#F0DFEE] rounded-xl">
+        <div className="grid grid-cols-3 gap-2 p-1 bg-purple-100/60 border border-purple-200/80 rounded-xl">
           {(['low', 'medium', 'high'] as Priority[]).map((p) => {
             const cfg = PRIORITY_CONFIG[p];
             const isSelected = form.priority === p;
@@ -176,7 +176,7 @@ function TaskForm({
                   'py-1.5 px-3 rounded-lg text-xs font-medium transition-all inline-flex items-center justify-center gap-1.5 border',
                   isSelected
                     ? clsx(cfg.badgeClass, 'shadow-xs font-semibold')
-                    : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                    : 'border-transparent text-purple-900/70 hover:text-black hover:bg-white/60'
                 )}
               >
                 <span
@@ -258,7 +258,7 @@ function TaskForm({
         />
       </div>
 
-      <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200/80">
+      <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-purple-100">
         <button className="btn-ghost" onClick={onClose} type="button">
           Cancel
         </button>
@@ -289,7 +289,7 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
         i % 2 === 1 ? (
           <mark
             key={i}
-            className="bg-[#FCE8F4] text-[#96246F] rounded px-0.5 font-normal"
+            className="bg-purple-100 text-purple-900 rounded px-0.5 font-semibold"
           >
             {part}
           </mark>
@@ -412,9 +412,9 @@ function TaskRow({
   return (
     <div
       className={clsx(
-        'flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 hover:bg-slate-50/80 transition-colors group border-l-[3px]',
+        'flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 hover:bg-purple-50/70 transition-colors group border-l-[3px]',
         isCompleted
-          ? 'opacity-75 bg-slate-50/40 border-l-slate-300'
+          ? 'opacity-75 bg-purple-50/30 border-l-purple-300'
           : priorityCfg.accentBorderClass
       )}
     >
@@ -434,8 +434,8 @@ function TaskRow({
               type="button"
               onClick={onEdit}
               className={clsx(
-                'text-sm font-semibold text-left hover:text-brand-600 transition-colors',
-                isCompleted ? 'line-through text-slate-500' : 'text-slate-900'
+                'text-sm font-semibold text-left hover:text-purple-700 transition-colors',
+                isCompleted ? 'line-through text-purple-400' : 'text-black'
               )}
             >
               <HighlightMatch text={task.title} query={searchQuery} />
@@ -452,29 +452,29 @@ function TaskRow({
           </div>
 
           {task.description && (
-            <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">
+            <p className="text-xs text-purple-900/60 mt-0.5 line-clamp-1 font-medium">
               <HighlightMatch text={task.description} query={searchQuery} />
             </p>
           )}
 
           {/* Unboxed Metadata Line */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 mt-1.5">
-            <span className="font-medium text-slate-700">
+          <div className="flex flex-wrap items-center gap-1.5 text-xs text-purple-900/60 mt-1.5 font-medium">
+            <span className="font-semibold text-black">
               <HighlightMatch text={task.subject} query={searchQuery} />
             </span>
             <span aria-hidden="true">·</span>
             <span
               className={clsx(
-                'font-mono tabular-nums inline-flex items-center gap-1',
+                'font-mono tabular-nums inline-flex items-center gap-1 font-semibold',
                 !isCompleted && urgency === 'critical'
-                  ? 'text-red-600 font-medium'
+                  ? 'text-purple-950 font-bold'
                   : !isCompleted && urgency === 'warning'
-                  ? 'text-amber-600 font-medium'
-                  : 'text-slate-500'
+                  ? 'text-purple-800 font-semibold'
+                  : 'text-purple-900/60'
               )}
             >
               {!isCompleted && urgency === 'critical' && (
-                <AlertTriangle className="w-3 h-3 shrink-0" />
+                <AlertTriangle className="w-3 h-3 text-purple-700 shrink-0" />
               )}
               {isCompleted
                 ? `Completed ${
@@ -489,7 +489,7 @@ function TaskRow({
               <>
                 <span aria-hidden="true">·</span>
                 <span
-                  className="inline-flex items-center gap-1 text-slate-400 font-mono tabular-nums"
+                  className="inline-flex items-center gap-1 text-purple-400 font-mono tabular-nums"
                   title="Completed tasks automatically move to Archive after 24 hours"
                 >
                   <Clock className="w-3 h-3" />
@@ -501,20 +501,20 @@ function TaskRow({
             {isArchiveView && (
               <>
                 <span aria-hidden="true">·</span>
-                <span className="text-slate-400 font-mono tabular-nums">
+                <span className="text-purple-400 font-mono tabular-nums">
                   Archived after 24h
                 </span>
               </>
             )}
 
             <span aria-hidden="true">·</span>
-            <span className="font-mono tabular-nums">
+            <span className="font-mono tabular-nums text-black font-semibold">
               Est. {hoursToReadable(task.estimatedHours)}
             </span>
             {task.aiPredictedHours && task.aiPredictedHours !== task.estimatedHours && (
               <>
                 <span aria-hidden="true">·</span>
-                <span className="font-mono tabular-nums text-brand-600">
+                <span className="font-mono tabular-nums text-purple-700 font-semibold">
                   AI Pred. {hoursToReadable(task.aiPredictedHours)}
                 </span>
               </>
@@ -522,7 +522,7 @@ function TaskRow({
             {task.tags?.length > 0 && (
               <>
                 <span aria-hidden="true">·</span>
-                <span className="text-slate-400">
+                <span className="text-purple-400">
                   {task.tags.slice(0, 3).join(' / ')}
                 </span>
               </>
@@ -538,7 +538,7 @@ function TaskRow({
             <button
               type="button"
               onClick={onRestore}
-              className="btn-secondary py-1 px-2.5 text-xs"
+              className="btn-secondary py-1 px-2.5 text-xs font-semibold"
               title="Restore task to active Completed list for 24h"
             >
               <ArchiveRestore className="w-3.5 h-3.5" />
@@ -547,7 +547,7 @@ function TaskRow({
             <button
               type="button"
               onClick={onReopen}
-              className="btn-ghost py-1 px-2.5 text-xs"
+              className="btn-ghost py-1 px-2.5 text-xs font-semibold"
               title="Reopen task as Pending"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -556,7 +556,7 @@ function TaskRow({
             <button
               type="button"
               onClick={onDelete}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+              className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-100 transition-colors"
               title="Delete task permanently"
               aria-label="Delete task"
             >
@@ -570,14 +570,14 @@ function TaskRow({
               onChange={(e) => onStatusChange(e.target.value as TaskStatus)}
               aria-label="Task status"
               className={clsx(
-                'text-xs rounded-xl px-2.5 py-1.5 border transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-400/20',
+                'text-xs rounded-xl px-2.5 py-1.5 border transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400/20',
                 task.status === 'completed'
-                  ? 'bg-[#FDF4F9] text-[#B8328A] border-[#F3CBE6]'
+                  ? 'bg-purple-50 text-purple-900 border-purple-200 font-semibold'
                   : task.status === 'in_progress'
-                  ? 'bg-[#FAF5FF] text-[#7E22CE] border-[#E9D5FF]'
+                  ? 'bg-purple-100 text-purple-950 border-purple-300 font-semibold'
                   : task.status === 'skipped'
-                  ? 'bg-[#FCF8FB] text-slate-500 border-[#F0DFEE]'
-                  : 'bg-white text-slate-700 border-[#F0DFEE]'
+                  ? 'bg-purple-50/50 text-purple-400 border-purple-100'
+                  : 'bg-white text-black border-purple-200 font-medium'
               )}
             >
               {Object.entries(STATUS_CONFIG).map(([k, v]) => (
@@ -591,7 +591,7 @@ function TaskRow({
               <button
                 type="button"
                 onClick={onOpenPlan}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-brand-600 hover:bg-brand-50 transition-colors"
+                className="p-1.5 rounded-lg text-purple-400 hover:text-purple-700 hover:bg-purple-50 transition-colors"
                 title="AI Study Plan"
                 aria-label="Open AI Study Plan"
               >
@@ -600,7 +600,7 @@ function TaskRow({
               <button
                 type="button"
                 onClick={onEdit}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-50 transition-colors"
                 title="Edit task"
                 aria-label="Edit task"
               >
@@ -610,7 +610,7 @@ function TaskRow({
                 <button
                   type="button"
                   onClick={onArchive}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                  className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-50 transition-colors"
                   title="Move to Archive now"
                   aria-label="Archive task"
                 >
@@ -621,7 +621,7 @@ function TaskRow({
                 <button
                   type="button"
                   onClick={onSkip}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"
+                  className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-50 transition-colors"
                   title="Skip & reschedule"
                   aria-label="Skip task"
                 >
@@ -631,7 +631,7 @@ function TaskRow({
               <button
                 type="button"
                 onClick={onDelete}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                className="p-1.5 rounded-lg text-purple-400 hover:text-black hover:bg-purple-100 transition-colors"
                 title="Delete task"
                 aria-label="Delete task"
               >
@@ -813,18 +813,18 @@ export default function TasksPage() {
           <p className="page-subtitle">
             {showArchive ? (
               <>
-                <span className="font-mono tabular-nums font-medium text-slate-700">
+                <span className="font-mono tabular-nums font-semibold text-black">
                   {archivedTasks.length}
                 </span>{' '}
                 archived task{archivedTasks.length !== 1 ? 's' : ''} · Automatically moved 24 hours after completion
               </>
             ) : (
               <>
-                <span className="font-mono tabular-nums font-medium text-slate-700">
+                <span className="font-mono tabular-nums font-semibold text-black">
                   {activeCount}
                 </span>{' '}
                 active task{activeCount !== 1 ? 's' : ''} ·{' '}
-                <span className="font-mono tabular-nums font-medium text-slate-700">
+                <span className="font-mono tabular-nums font-semibold text-black">
                   {hoursToReadable(totalEstimatedHours)}
                 </span>{' '}
                 remaining workload
@@ -838,24 +838,24 @@ export default function TasksPage() {
             onClick={() => setShowArchive((prev) => !prev)}
             className={clsx(
               'btn-secondary',
-              showArchive && 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800 hover:text-white'
+              showArchive && 'bg-black text-white border-black hover:bg-purple-900 hover:text-white'
             )}
           >
-            <Archive className="w-4 h-4" />
+            <Archive className="w-4 h-4 text-purple-700" />
             <span>{showArchive ? 'Back to Active Tasks' : 'Archive'}</span>
             <span
               className={clsx(
-                'font-mono tabular-nums text-xs px-1.5 py-0.5 rounded',
+                'font-mono tabular-nums text-xs px-1.5 py-0.5 rounded font-bold',
                 showArchive
-                  ? 'bg-white/15 text-white'
-                  : 'bg-slate-100 text-slate-600'
+                  ? 'bg-white/20 text-white'
+                  : 'bg-purple-100 text-purple-900'
               )}
             >
               {archivedTasks.length}
             </span>
           </button>
 
-          <button onClick={() => setShowCreate(true)} className="btn-primary">
+          <button onClick={() => setShowCreate(true)} className="btn-primary font-bold">
             <Plus className="w-4 h-4" />
             <span>New Task</span>
           </button>
@@ -863,17 +863,17 @@ export default function TasksPage() {
       </div>
 
       {/* Top Search Bar */}
-      <div className="card bg-[#FFFCFE] p-2.5 sm:p-3">
+      <div className="card p-2 sm:p-2.5 border border-purple-200">
         <div className="relative flex items-center">
           <Search
-            className="absolute left-3.5 w-4 h-4 text-[#B8328A]/70 pointer-events-none"
+            className="absolute left-3.5 w-4 h-4 text-purple-400 pointer-events-none"
             aria-hidden="true"
           />
           <input
             ref={searchInputRef}
             type="search"
             aria-label="Search tasks"
-            className="input pl-10 pr-28 py-2.5 bg-white border-[#E8CEE6] text-sm"
+            className="input pl-10 pr-28 py-2.5 bg-white border-purple-200 text-sm text-black placeholder-purple-400"
             placeholder={
               showArchive
                 ? 'Search archived tasks by title, subject, category, or tag...'
@@ -894,7 +894,7 @@ export default function TasksPage() {
           <div className="absolute right-2.5 flex items-center gap-2">
             {search.trim() ? (
               <>
-                <span className="text-xs text-slate-500 font-mono tabular-nums hidden sm:inline">
+                <span className="text-xs text-purple-900/60 font-mono tabular-nums font-semibold hidden sm:inline">
                   {filtered.length} {filtered.length === 1 ? 'match' : 'matches'}
                 </span>
                 <button
@@ -903,7 +903,7 @@ export default function TasksPage() {
                     setSearch('');
                     searchInputRef.current?.focus();
                   }}
-                  className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs text-slate-600 bg-[#FDF4F9] hover:bg-[#FCE8F4] border border-[#F0C6E4] transition-colors"
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs text-purple-900 bg-purple-100 hover:bg-purple-200 border border-purple-200 transition-colors font-semibold"
                   aria-label="Clear search"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -912,7 +912,7 @@ export default function TasksPage() {
               </>
             ) : (
               <kbd
-                className="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-slate-400 bg-[#FDF4F9] border border-[#EAD4E8] rounded-md pointer-events-none"
+                className="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-purple-400 bg-purple-50 border border-purple-200 rounded-md pointer-events-none"
                 title="Press / to search"
               >
                 /
@@ -925,7 +925,7 @@ export default function TasksPage() {
       {/* Interactive Status Segmented Tabs & Filter Controls */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         {!showArchive ? (
-          <div className="flex items-center gap-1 p-1 bg-[#F7ECF5] border border-[#F0DFEE] rounded-xl overflow-x-auto w-full sm:w-fit">
+          <div className="flex items-center gap-1 p-1 bg-purple-100/70 border border-purple-200/80 rounded-xl overflow-x-auto w-full sm:w-fit">
             {(
               [
                 { id: 'all', label: 'All' },
@@ -942,15 +942,15 @@ export default function TasksPage() {
                 className={clsx(
                   'px-3 py-1.5 rounded-lg text-xs transition-colors whitespace-nowrap flex items-center gap-1.5',
                   filterStatus === tab.id
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white text-black font-bold shadow-xs'
+                    : 'text-purple-900/70 hover:text-black font-medium'
                 )}
               >
                 <span>{tab.label}</span>
                 <span
                   className={clsx(
-                    'tabular-nums text-[11px]',
-                    filterStatus === tab.id ? 'text-[#C83E8B]' : 'text-slate-400'
+                    'tabular-nums text-[11px] font-mono',
+                    filterStatus === tab.id ? 'text-black font-bold' : 'text-purple-400'
                   )}
                 >
                   {statusCounts[tab.id]}
@@ -959,18 +959,18 @@ export default function TasksPage() {
             ))}
           </div>
         ) : (
-          <div className="card px-4 py-3 bg-[#FFFCFE] border-[#E8CEE6] flex flex-col sm:flex-row sm:items-center justify-between gap-2 flex-1">
-            <div className="flex items-center gap-2.5 text-xs text-slate-600">
-              <Archive className="w-4 h-4 text-slate-500 shrink-0" />
+          <div className="card px-4 py-3 bg-white border-purple-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 flex-1">
+            <div className="flex items-center gap-2.5 text-xs text-purple-900/70 font-medium">
+              <Archive className="w-4 h-4 text-purple-600 shrink-0" />
               <span>
                 Completed tasks are automatically moved to this hidden Archive list after{' '}
-                <strong className="font-semibold text-slate-800">24 hours</strong> to keep your main task view clean.
+                <strong className="font-bold text-black">24 hours</strong> to keep your main task view clean.
               </span>
             </div>
             <button
               type="button"
               onClick={() => setShowArchive(false)}
-              className="text-xs font-semibold text-brand-600 hover:text-brand-700 shrink-0 self-start sm:self-auto"
+              className="text-xs font-bold text-purple-700 hover:text-black shrink-0 self-start sm:self-auto"
             >
               Return to main view →
             </button>
@@ -979,7 +979,7 @@ export default function TasksPage() {
 
         <div className="flex flex-wrap items-center gap-2.5">
           {/* Priority Interactive Filter Buttons */}
-          <div className="flex items-center gap-1 p-1 bg-[#F7ECF5] rounded-xl border border-[#F0DFEE]">
+          <div className="flex items-center gap-1 p-1 bg-purple-100/70 rounded-xl border border-purple-200/80">
             {(['all', 'high', 'medium', 'low'] as const).map((p) => {
               const isSelected = filterPriority === p;
               const count =
@@ -994,8 +994,8 @@ export default function TasksPage() {
                   className={clsx(
                     'px-2.5 py-1 rounded-lg text-xs transition-colors whitespace-nowrap inline-flex items-center gap-1.5',
                     isSelected
-                      ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white text-black font-bold shadow-xs'
+                      : 'text-purple-900/70 hover:text-black font-medium'
                   )}
                 >
                   {p !== 'all' && (
@@ -1010,8 +1010,8 @@ export default function TasksPage() {
                   <span>{p === 'all' ? 'All Priority' : PRIORITY_CONFIG[p].label}</span>
                   <span
                     className={clsx(
-                      'tabular-nums text-[11px]',
-                      isSelected ? 'text-[#C83E8B]' : 'text-slate-400'
+                      'tabular-nums text-[11px] font-mono',
+                      isSelected ? 'text-black font-bold' : 'text-purple-400'
                     )}
                   >
                     {count}
@@ -1023,7 +1023,7 @@ export default function TasksPage() {
 
           {!showArchive && (
             <select
-              className="input w-auto py-1.5 text-xs"
+              className="input w-auto py-1.5 text-xs font-medium border-purple-200"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortField)}
               aria-label="Sort tasks"
@@ -1043,10 +1043,10 @@ export default function TasksPage() {
           type="button"
           onClick={() => setFilterCategory('all')}
           className={clsx(
-            'px-2.5 py-1 rounded-md text-xs font-medium border transition-colors whitespace-nowrap shrink-0',
+            'px-2.5 py-1 rounded-md text-xs font-bold border transition-colors whitespace-nowrap shrink-0',
             filterCategory === 'all'
-              ? 'bg-slate-900 text-white border-slate-900 font-semibold'
-              : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+              ? 'bg-black text-white border-black'
+              : 'bg-white text-purple-900 border-purple-200 hover:bg-purple-50'
           )}
         >
           All Categories
@@ -1078,10 +1078,10 @@ export default function TasksPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="empty-state">
-          <div className="text-sm font-semibold text-slate-800">
+          <div className="text-sm font-bold text-black">
             {showArchive ? 'No archived tasks' : 'No matching tasks'}
           </div>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm">
+          <p className="text-xs text-purple-900/60 mt-1 max-w-sm font-medium">
             {showArchive
               ? 'Tasks that have been completed for more than 24 hours will automatically appear here.'
               : search ||
@@ -1131,7 +1131,7 @@ export default function TasksPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          <div className="card bg-[#FFFCFE] divide-y divide-[#EAD4E8]/75 overflow-hidden">
+          <div className="card overflow-hidden divide-y divide-purple-100">
             {filtered.map((task) => (
               <TaskRow
                 key={task._id}
@@ -1164,11 +1164,11 @@ export default function TasksPage() {
 
           {/* Subtle Archive Footer Indicator when in Main Task View */}
           {!showArchive && archivedTasks.length > 0 && (
-            <div className="flex items-center justify-between px-4 py-2.5 rounded-lg bg-slate-100/80 border border-slate-200/70 text-xs text-slate-500">
+            <div className="flex items-center justify-between px-4 py-2.5 rounded-lg bg-purple-50/80 border border-purple-200/70 text-xs text-purple-900/70">
               <div className="flex items-center gap-2">
-                <Archive className="w-3.5 h-3.5 text-slate-400" />
+                <Archive className="w-3.5 h-3.5 text-purple-600" />
                 <span>
-                  <strong className="font-semibold text-slate-700 font-mono tabular-nums">
+                  <strong className="font-semibold text-black font-mono tabular-nums">
                     {archivedTasks.length}
                   </strong>{' '}
                   completed task{archivedTasks.length !== 1 ? 's' : ''} (&gt;24h old) automatically moved to Archive
@@ -1177,7 +1177,7 @@ export default function TasksPage() {
               <button
                 type="button"
                 onClick={() => setShowArchive(true)}
-                className="font-medium text-brand-600 hover:text-brand-700 transition-colors"
+                className="font-semibold text-purple-700 hover:text-black transition-colors"
               >
                 View Archive →
               </button>

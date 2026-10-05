@@ -26,7 +26,7 @@ import toast from 'react-hot-toast';
 import clsx from 'clsx';
 
 const NAV_ITEMS = [
-  { to: '/dashboard', label: 'Journal Spread', icon: LayoutDashboard },
+  { to: '/dashboard', label: 'Dashboard',       icon: LayoutDashboard },
   { to: '/tasks',     label: 'Tasks',          icon: CheckSquare },
   { to: '/schedule',  label: 'Calendar & Sync', icon: Calendar },
   { to: '/plan',      label: 'Study Plans',    icon: BookOpen },
@@ -34,8 +34,8 @@ const NAV_ITEMS = [
 ] as const;
 
 const PAGE_TITLES: Record<string, string> = {
-  '/dashboard': 'Journal Spread',
-  '/tasks': 'Tasks Ledger',
+  '/dashboard': 'Dashboard',
+  '/tasks': 'Tasks',
   '/schedule': 'Schedule & Google Calendar',
   '/plan': 'Study Plans & Roadmaps',
   '/analytics': 'Study Analytics',
@@ -141,7 +141,7 @@ export default function AppLayout() {
     }
   }
 
-  const pageTitle = PAGE_TITLES[location.pathname] ?? 'TaskTracker';
+  const pageTitle = PAGE_TITLES[location.pathname] ?? 'TaskTrack AI';
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -168,54 +168,46 @@ export default function AppLayout() {
   const todayFormatted = format(new Date(), 'EEEE, MMMM d');
 
   return (
-    <div className="flex h-screen overflow-hidden diary-page-surface">
+    <div className="flex h-screen overflow-hidden bg-[#FAF8FC] text-black">
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Stationery Spine & Index Sidebar */}
+      {/* Purple, White & Black Workspace Sidebar */}
       <aside
         className={clsx(
-          'fixed inset-y-0 left-0 z-50 w-60 flex flex-col bg-[#FFFBFD]/95 backdrop-blur-md border-r border-[#E6C6E4] transition-transform duration-150 ease-out lg:static lg:translate-x-0 relative',
+          'fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white border-r border-purple-100/90 transition-transform duration-150 ease-out lg:static lg:translate-x-0 relative',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* Decorative Notebook Ring-Binder Loops on Right Spine Edge */}
-        <div
-          aria-hidden="true"
-          className="hidden lg:flex flex-col justify-between pointer-events-none absolute -right-2 top-20 bottom-20 z-30"
-        >
-          {[...Array(7)].map((_, idx) => (
-            <div
-              key={idx}
-              className="w-3.5 h-2 rounded-full bg-gradient-to-r from-[#DFB8DC] via-[#FFF8FD] to-[#D4A4D1] border border-[#C993C6] shadow-sm"
-            />
-          ))}
-        </div>
-
         {/* Brand Folio Header */}
-        <div className="flex items-center justify-between px-5 h-16 border-b border-[#EAD4E8] shrink-0">
-          <NavLink to="/" className="flex flex-col">
-            <span className="text-xl text-[#2A1029] tracking-tight leading-none">
-              TaskTracker
-            </span>
-            <span className="text-[11px] text-[#96246F] mt-1">
-              Personal Study Diary
-            </span>
+        <div className="flex items-center justify-between px-5 h-16 border-b border-purple-100 shrink-0">
+          <NavLink to="/" className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-purple-400 font-bold text-sm shadow-xs border border-purple-900/50">
+              T
+            </div>
+            <div className="flex flex-col">
+              <span className="text-base font-bold text-black tracking-tight leading-none">
+                TaskTrack <span className="text-purple-600">AI</span>
+              </span>
+              <span className="text-[11px] text-purple-900/70 mt-1 font-medium">
+                Study &amp; Task Workspace
+              </span>
+            </div>
           </NavLink>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="lg:hidden p-1.5 rounded-lg text-purple-400 hover:bg-purple-50 hover:text-purple-900 transition-colors"
             aria-label="Close sidebar"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Light Green New Task Button */}
+        {/* New Task Button */}
         <div className="px-4 pt-4 pb-2">
           <button
             type="button"
@@ -223,15 +215,15 @@ export default function AppLayout() {
               setSidebarOpen(false);
               setQuickAddOpen(true);
             }}
-            className="btn-primary w-full justify-center py-2.5"
+            className="btn-primary w-full justify-center py-2"
           >
             <Plus className="w-4 h-4" />
             <span>New Task</span>
           </button>
         </div>
 
-        {/* Diary Index Tabs Navigation */}
-        <nav className="flex-1 px-3 py-3 space-y-1.5 overflow-y-auto">
+        {/* Navigation */}
+        <nav className="flex-1 px-3 py-3 space-y-1 overflow-y-auto">
           {NAV_ITEMS.map(({ to, label, icon: Icon }) => {
             const isActive =
               location.pathname === to || (to !== '/dashboard' && location.pathname.startsWith(to));
@@ -244,17 +236,17 @@ export default function AppLayout() {
                 end={to === '/dashboard'}
                 onClick={() => setSidebarOpen(false)}
                 className={clsx(
-                  'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm border transition-all duration-150',
+                  'flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors',
                   isActive
-                    ? 'bg-gradient-to-r from-[#FCE7F3] to-[#F3E8FF] text-[#781D59] border-[#E5B8E0] shadow-sm'
-                    : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-[#FDF4F9]/70'
+                    ? 'bg-purple-100 text-purple-950 font-semibold border-r-2 border-purple-700'
+                    : 'text-purple-950/70 hover:text-black hover:bg-purple-50'
                 )}
               >
-                <span className="flex items-center gap-3 min-w-0">
+                <span className="flex items-center gap-2.5 min-w-0">
                   <Icon
                     className={clsx(
                       'w-4 h-4 shrink-0',
-                      isActive ? 'text-[#B8328A]' : 'text-slate-400'
+                      isActive ? 'text-purple-700' : 'text-purple-400'
                     )}
                   />
                   <span className="truncate">{label}</span>
@@ -262,8 +254,8 @@ export default function AppLayout() {
                 {badgeCount !== null && badgeCount > 0 && (
                   <span
                     className={clsx(
-                      'text-xs tabular-nums',
-                      isActive ? 'text-[#96246F]' : 'text-slate-400'
+                      'text-xs tabular-nums px-2 py-0.5 rounded-md font-semibold font-mono',
+                      isActive ? 'bg-purple-700 text-white' : 'bg-purple-100 text-purple-900'
                     )}
                   >
                     {badgeCount}
@@ -274,66 +266,58 @@ export default function AppLayout() {
           })}
         </nav>
 
-        {/* Subtle Bottom Date Stamp & Preferences */}
-        <div className="px-4 py-3.5 border-t border-[#EAD4E8] bg-[#FDF7FC]/80 text-xs text-slate-500 space-y-2">
+        {/* Bottom Preferences & Date Status */}
+        <div className="px-4 py-3.5 border-t border-purple-100 bg-purple-50/40 text-xs text-purple-900/70 space-y-2">
           <button
             type="button"
             onClick={() => {
               setSidebarOpen(false);
               setPrefsOpen(true);
             }}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-white/80 hover:bg-white border border-[#E8CEE6] text-xs text-[#781D59] transition-colors"
+            className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white hover:bg-purple-50 border border-purple-200 text-xs text-black transition-colors shadow-xs"
           >
             <span className="flex items-center gap-2">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-[#B8328A]" />
+              <SlidersHorizontal className="w-3.5 h-3.5 text-purple-600" />
               <span>Study Capacity</span>
             </span>
-            <span className="tabular-nums text-[11px] text-slate-500">
+            <span className="tabular-nums text-[11px] text-purple-900 font-semibold font-mono">
               {profile?.studyHoursPerDay ?? studyHoursPerDay}h/day
             </span>
           </button>
-          <div className="px-1 flex items-center justify-between">
-            <span className="text-[#781D59] truncate">{todayFormatted}</span>
-            <span className="text-[11px] text-slate-400 tabular-nums shrink-0">
+          <div className="px-1 flex items-center justify-between text-[11px]">
+            <span className="text-purple-950 truncate font-medium">{todayFormatted}</span>
+            <span className="text-purple-700 font-mono tabular-nums shrink-0">
               {pendingTasks.length} open
             </span>
           </div>
         </div>
       </aside>
 
-      {/* Main Open-Diary Viewport */}
+      {/* Main Viewport */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
-        <div
-          aria-hidden="true"
-          className="hidden sm:block pointer-events-none absolute top-0 right-10 w-5 h-12 bg-gradient-to-b from-[#D44FA6] to-[#9333EA] z-30 shadow-sm"
-          style={{
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%)',
-          }}
-        />
-
-        <header className="flex items-center justify-between gap-4 px-6 sm:px-10 h-16 bg-[#FFFBFD]/85 backdrop-blur-md border-b border-[#EAD4E8] shrink-0 z-20">
+        <header className="flex items-center justify-between gap-4 px-6 sm:px-8 h-15 bg-white border-b border-purple-100/90 shrink-0 z-20">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 -ml-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 -ml-2 rounded-lg text-purple-900 hover:bg-purple-50 transition-colors"
               aria-label="Open menu"
             >
               <Menu className="w-4 h-4" />
             </button>
-            <span className="text-base text-slate-900 truncate">{pageTitle}</span>
-            <span aria-hidden="true" className="hidden md:inline text-[#D9AED5]">·</span>
-            <span className="hidden md:inline text-xs text-slate-500 truncate">
+            <span className="text-sm font-bold text-black truncate">{pageTitle}</span>
+            <span aria-hidden="true" className="hidden md:inline text-purple-300">·</span>
+            <span className="hidden md:inline text-xs text-purple-900/70 font-medium truncate">
               {todayFormatted}
             </span>
           </div>
 
-          <div className="flex items-center gap-2.5 sm:pr-8">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 hover:bg-[#FDF4F9] border border-[#E8CEE6] text-xs text-slate-500 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 border border-purple-200 text-xs text-purple-900 transition-colors"
             >
-              <Search className="w-3.5 h-3.5 text-[#C83E8B] shrink-0" />
+              <Search className="w-3.5 h-3.5 text-purple-600 shrink-0" />
               <span className="hidden sm:inline">Search entries...</span>
             </button>
 
@@ -348,7 +332,7 @@ export default function AppLayout() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto diary-page-surface">
+        <main className="flex-1 overflow-y-auto bg-[#FAF8FC]">
           <Outlet />
         </main>
       </div>
@@ -357,7 +341,7 @@ export default function AppLayout() {
       <Modal
         isOpen={quickAddOpen}
         onClose={() => setQuickAddOpen(false)}
-        title="New Diary Task"
+        title="New Task"
       >
         <form onSubmit={handleQuickAddSubmit} className="space-y-4">
           <div>
@@ -393,7 +377,7 @@ export default function AppLayout() {
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#F0DFEE]">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-purple-100">
             <button
               type="button"
               onClick={() => setQuickAddOpen(false)}
@@ -429,13 +413,13 @@ export default function AppLayout() {
                 step={0.5}
                 value={studyHoursPerDay}
                 onChange={(e) => setStudyHoursPerDay(Number(e.target.value))}
-                className="flex-1 accent-[#B8328A]"
+                className="flex-1 accent-purple-700"
               />
-              <span className="w-16 text-right text-sm tabular-nums text-[#2A1029] px-2.5 py-1 rounded-lg bg-[#FDF4F9] border border-[#E8CEE6]">
+              <span className="w-16 text-right text-sm tabular-nums text-black font-mono px-2.5 py-1 rounded-lg bg-purple-50 border border-purple-200 font-semibold">
                 {studyHoursPerDay}h / day
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-[11px] text-purple-900/70 mt-1">
               Used by the Earliest-Deadline-First Schedule Optimizer to allocate daily study blocks.
             </p>
           </div>
@@ -453,12 +437,17 @@ export default function AppLayout() {
                     className={clsx(
                       'p-2.5 rounded-xl border text-left transition-all',
                       active
-                        ? 'bg-[#FDF4F9] border-[#C83E8B] text-[#781D59]'
-                        : 'bg-white border-[#EAD4E8] text-slate-600 hover:bg-[#FCF8FB]'
+                        ? 'bg-purple-900 border-purple-950 text-white font-semibold shadow-xs'
+                        : 'bg-white border-purple-200 text-purple-950 hover:bg-purple-50'
                     )}
                   >
-                    <div className="text-xs font-medium">{slot.label}</div>
-                    <div className="text-[11px] tabular-nums text-slate-500 mt-0.5">
+                    <div className="text-xs font-semibold">{slot.label}</div>
+                    <div
+                      className={clsx(
+                        'text-[11px] tabular-nums mt-0.5 font-mono',
+                        active ? 'text-purple-200' : 'text-purple-400'
+                      )}
+                    >
                       {slot.window}
                     </div>
                   </button>
@@ -475,11 +464,11 @@ export default function AppLayout() {
               max={12}
               value={currentSemester}
               onChange={(e) => setCurrentSemester(Number(e.target.value))}
-              className="input tabular-nums"
+              className="input tabular-nums font-mono"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#F0DFEE]">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-purple-100">
             <button
               type="button"
               onClick={() => setPrefsOpen(false)}
@@ -507,22 +496,22 @@ export default function AppLayout() {
             if (e.target === e.currentTarget) setSearchOpen(false);
           }}
         >
-          <div className="fixed inset-0 bg-slate-900/20 backdrop-blur-[1px]" onClick={() => setSearchOpen(false)} />
-          <div className="relative w-full max-w-xl rounded-2xl bg-white border border-[#EAD4E8] shadow-xl overflow-hidden z-10 animate-scale-in">
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-[#EAD4E8]">
-              <Search className="w-4 h-4 text-[#C83E8B] shrink-0" />
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" onClick={() => setSearchOpen(false)} />
+          <div className="relative w-full max-w-xl rounded-2xl bg-white border border-purple-200 shadow-2xl overflow-hidden z-10 animate-scale-in">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-purple-100">
+              <Search className="w-4 h-4 text-purple-400 shrink-0" />
               <input
                 type="text"
                 autoFocus
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search tasks by title, subject, or category..."
-                className="w-full text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+                className="w-full text-sm text-black placeholder-purple-400 focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                className="p-1 rounded text-slate-400 hover:text-slate-700"
+                className="p-1 rounded-lg text-purple-400 hover:text-black hover:bg-purple-50 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -530,7 +519,7 @@ export default function AppLayout() {
 
             <div className="max-h-80 overflow-y-auto p-2">
               {filteredSearchTasks.length === 0 ? (
-                <div className="py-6 text-center text-xs text-slate-500">
+                <div className="py-6 text-center text-xs text-purple-900/60 font-medium">
                   No matching entries found.
                 </div>
               ) : (
@@ -543,20 +532,20 @@ export default function AppLayout() {
                         setSearchOpen(false);
                         navigate(`/tasks?edit=${task._id}`);
                       }}
-                      className="w-full flex items-center justify-between gap-3 px-2.5 py-2 rounded-xl hover:bg-[#FCF8FB] transition-colors text-left"
+                      className="w-full flex items-center justify-between gap-3 px-2.5 py-2 rounded-xl hover:bg-purple-50 transition-colors text-left"
                     >
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-slate-900 truncate">
+                          <span className="text-xs text-black font-semibold truncate">
                             {task.title}
                           </span>
                           <CategoryLabel category={task.category} />
                         </div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
+                        <div className="text-[11px] text-purple-900/70 mt-0.5 font-medium">
                           {task.subject} · {deadlineLabel(task.deadline)} · {hoursToReadable(task.estimatedHours)}
                         </div>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-purple-400 shrink-0" />
                     </button>
                   ))}
                 </div>
