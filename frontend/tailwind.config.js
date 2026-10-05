@@ -38,10 +38,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        serif:   ['"Playfair Display"', 'Georgia', 'serif'],
-        mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        sans:    ['"Times New Roman"', 'Times', 'serif'],
+        display: ['"Times New Roman"', 'Times', 'serif'],
+        serif:   ['"Times New Roman"', 'Times', 'serif'],
+        mono:    ['"Times New Roman"', 'Times', 'serif'],
       },
       boxShadow: {
         xs:           '0 1px 2px 0 rgba(0, 0, 0, 0.04)',

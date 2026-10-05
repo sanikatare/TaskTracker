@@ -38,7 +38,7 @@ const CHART_DEFAULTS = {
     legend: {
       labels: {
         color: '#64748B',
-        font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', size: 11, weight: '500' as const },
+        font: { family: '"Times New Roman", Times, serif', size: 11, weight: '500' as const },
         padding: 14,
         usePointStyle: true,
         pointStyleWidth: 8,
@@ -50,8 +50,8 @@ const CHART_DEFAULTS = {
       borderWidth: 1,
       titleColor: '#FFFFFF',
       bodyColor: '#E2E8F0',
-      titleFont: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: '600' as const, size: 12 },
-      bodyFont: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 },
+      titleFont: { family: '"Times New Roman", Times, serif', weight: '600' as const, size: 12 },
+      bodyFont: { family: '"Times New Roman", Times, serif', weight: 'normal' as const, size: 11 },
       padding: 10,
       boxPadding: 5,
       cornerRadius: 8,
@@ -61,12 +61,12 @@ const CHART_DEFAULTS = {
   },
   scales: {
     x: {
-      ticks: { color: '#64748B', font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 } },
+      ticks: { color: '#64748B', font: { family: '"Times New Roman", Times, serif', weight: 'normal' as const, size: 11 } },
       grid: { color: '#F1F5F9', drawBorder: false },
       border: { display: false },
     },
     y: {
-      ticks: { color: '#64748B', font: { family: '"Plus Jakarta Sans", system-ui, sans-serif', weight: 'normal' as const, size: 11 } },
+      ticks: { color: '#64748B', font: { family: '"Times New Roman", Times, serif', weight: 'normal' as const, size: 11 } },
       grid: { color: '#F1F5F9', drawBorder: false },
       border: { display: false },
     },

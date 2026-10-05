@@ -21,21 +21,28 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
   }
 
   body {
-    @apply text-slate-900 font-sans antialiased bg-[#FAF8FC];
+    @apply text-slate-900 antialiased bg-[#FAF8FC];
+    font-family: 'Times New Roman', Times, serif;
     min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold text-black tracking-tight;
+    @apply font-bold text-black tracking-tight;
+    font-family: 'Times New Roman', Times, serif;
     text-wrap: balance;
+  }
+
+  input, button, select, textarea, kbd, code, pre {
+    font-family: 'Times New Roman', Times, serif;
   }
 
   * {
     box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
   }
 
   ::-webkit-scrollbar {
